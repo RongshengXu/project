@@ -15,6 +15,9 @@ handlers:
 - url: /assets/fonts
   static_dir: assets/fonts
 
+- url: /login
+  script: handlers.Login.app
+
 - url: /.*
   script: Main.app
 
