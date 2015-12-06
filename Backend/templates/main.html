@@ -69,6 +69,26 @@
         <div class="panel panel-default">
             <div class="panel-heading">All Restaurants</div>
             <div class="panel-body">
+                {% if restaurant_query_len > 0%}
+                    {% for item in restaurant_info %}
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <img src={{item[1]}} class="img-responsive img-rounded displayed"/>
+                                </div>
+                                <div class="panel-footer">
+                                    <div style="text-align: center" class="list-group-item-heading">
+                                        <b>{{item[0]}}</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div style="text-align: center" class="list-group-item-heading">
+                        <p>No Restaurant are available</p>
+                    </div>
+                {% endif %}
 
             </div>
         </div>
