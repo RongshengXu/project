@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/assets/css/common-style.css" />
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/evaluate_restaurant.js"></script>
 </head>
 <body>
     <div class="container">
@@ -29,9 +30,40 @@
     </div>
 
     <div class="container">
-        <div class="col-md-12" style="background-image: url('http://goo.gl/04j7Nn')">
-            <img class="restaurant_logo img-rounded" src="http://stunningdesignz.com/wp-content/uploads/2015/04/foodlover.png"/>
+        <div class="jumbotron col-md-12">
+            <div class="col-md-2">
+                <img class="restaurant_logo img-rounded" src="http://stunningdesignz.com/wp-content/uploads/2015/04/foodlover.png"/>
+            </div>
+            <div class="col-md-4">
+                <h1>The Name</h1>
+                <p>Valuation</p>
+                <p>Category</p>
+            </div>
         </div>
+
+        <div class="col-md-12">
+            <ul class="nav nav-tabs">
+                <li><a href="#">Order Food</a></li>
+                <li class="active"><a href="#">Evaluate</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="gap_small"></div>
+
+    <div class="container">
+        <form>
+            <div class="form-group">
+              <textarea id="post_box" class="form-control" rows="2" placeholder="What's on your mind?"></textarea>
+            </div>
+        </form>
+        <div class="button-group pull-right">
+            <p class="counter">500</p>
+            <a href="#" id="post_btn" class="btn btn-primary">Post</a>
+        </div>
+
+        <ul id="posts">
+        </ul>
     </div>
 
 </body>

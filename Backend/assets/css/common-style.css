@@ -62,6 +62,39 @@ img.single_pic {
 
 .restaurant_logo{
     display: inline;
-    border-radius: 100px;
-    height: 150px;
+    border-radius: 50%;
+    height: 100px;
+}
+
+.jumbotron{
+    background-image:url('http://static11.elemecdn.com/eleme/desktop/media/img/shop-bg.0391dd.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.jumbotron:before{
+    -webkit-filter: blur(2px);
+}
+
+.jumbotron h1 {
+    position: relative;
+    color: #fff;
+    margin-top: 10px;
+    font-size: 20px;
+    font-family: 'Shift', sans-serif;
+    font-weight: bold;
+}
+
+.jumbotron p {
+    position: relative;
+    margin: auto;
+    font-size: 13px;
+    color: #fff;
+}
+
+.counter {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 10px;
 }
