@@ -1,17 +1,21 @@
-__author__ = 'rongshengxu'
-
 from google.appengine.api import users
 
+from google.appengine.ext import db
+from google.appengine.ext import ndb
+from google.appengine.ext import blobstore
+
 import webapp2
+
 import os
 import jinja2
+from handlers.DataModel import RestaurantModel
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-class LocationPage(webapp2.RequestHandler):
+class EvaluatePage(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
 
@@ -20,17 +24,15 @@ class LocationPage(webapp2.RequestHandler):
             url_linktext = 'Logout'
 
             template_values = {
-                    'user': user,
-                    'url': url,
-                    'url_linktext': url_linktext,
-                }
-
-            template = JINJA_ENVIRONMENT.get_template('templates/location.html')
+                'user': user,
+                'url': url,
+                'url_linktext': url_linktext,
+            }
+            template = JINJA_ENVIRONMENT.get_template('templates/evaluate.html')
             self.response.write(template.render(template_values))
         else:
             self.redirect('/')
 
 app = webapp2.WSGIApplication([
-    ('/location', LocationPage)
+    ('.*/evaluate', EvaluatePage)
 ], debug=True)
-

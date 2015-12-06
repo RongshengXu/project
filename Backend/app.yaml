@@ -15,6 +15,11 @@ handlers:
   static_dir: assets/fonts
 
 # process handlers
+- url: .*/evaluate
+  script: RestaurantHandler.app
+
+- url: /restaurantregister
+  script: RestaurantRegisterHandler.app
 
 - url: /view_picture/([^/]+)?
   script: handlers.ViewPictureHandler.app

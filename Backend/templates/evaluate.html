@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>HUNGRY|Main Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/common-style.css" />
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <p class="navbar-brand">Hungry</p>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="main">Main</a></li>
+                    <li><a href="location">Location</a></li>
+                    <li><a href="myorders">My Orders</a></li>
+                    <li><a href="servicecenter">Service Center</a></li>
+                    <li><a href={{url}}>{{url_linktext}}</a><li></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="col-md-12" style="background-image: url('http://goo.gl/04j7Nn')">
+            <img class="restaurant_logo img-rounded" src="http://stunningdesignz.com/wp-content/uploads/2015/04/foodlover.png"/>
+        </div>
+    </div>
+
+</body>
+</html>
+{% endautoescape %}
