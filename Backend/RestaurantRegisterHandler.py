@@ -48,7 +48,7 @@ class Register(blobstore_handlers.BlobstoreUploadHandler):
         # img = self.request.get('img')
         # img = images.resize(img, 64,64)
         # restaurant.coverPage = img
-        self.redirect('/main')
+        self.redirect('/main_restaurant')
 
 class ViewPictureHandler(blobstore_handlers.BlobstoreDownloadHandler):
     def get(self, photo_key):

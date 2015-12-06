@@ -14,12 +14,16 @@ handlers:
 - url: /assets/fonts
   static_dir: assets/fonts
 
-- url: /restaurantregister
-  script: RestaurantRegisterHandler.app
+# process handlers
 
 - url: /view_picture/([^/]+)?
-  script: ViewPictureHandler.app
+  script: handlers.ViewPictureHandler.app
 #  script: RestaurantRegisterHandler.app
+
+# page handler
+
+- url: /restaurantregister
+  script: RestaurantRegisterHandler.app
 
 - url: /register
   script: RestaurantRegisterHandler.app
@@ -33,9 +37,18 @@ handlers:
 - url: /option
   script: OptionHandler.app
 
+- url: /main_restaurant
+  script: Main_Restaurant.app
+
 - url: /main
   script: MainHandler.app
   login: required
+
+- url: /option_get
+  script: OptionHandler.app
+
+- url: /option
+  script: OptionHandler.app
 
 - url: /.*
   script: LoginHandler.app

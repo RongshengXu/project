@@ -1,4 +1,5 @@
 __author__ = 'rongshengxu'
+
 from google.appengine.ext import ndb
 from google.appengine.ext import db
 
@@ -14,25 +15,32 @@ class RestaurantModel(ndb.Model):
     coverPage = ndb.BlobProperty()
     Blob_key = ndb.BlobKeyProperty()
     createTime = ndb.DateTimeProperty(auto_now_add=True)
+    payment = ndb.StringProperty()
+    type = ndb.StringProperty(repeated=True)
 
-    # lastUpdated = ndb.DateTimeProperty(auto_now=True)
-    # url = ndb.StringProperty()
-    # tag = ndb.StringProperty(repeated=True)
-    # subscribers = ndb.StringProperty(repeated=True)
-    # message = ndb.StringProperty()
-    # coverpageURL = ndb.StringProperty()
-    # totalPicture = ndb.IntegerProperty()
+class CartModel(ndb.Model):
+    """ cart to store current orders
+    """
+    orders = ndb.KeyProperty(kind='OrderModel', repeated=True)
 
 class DishModel(ndb.Model):
-    """ picture model
+    """ dish model
     """
     name = ndb.StringProperty()
-    price = ndb
-    picture = db.BlobProperty()
-    # lat = db.FloatProperty()
-    # lg = db.FloatProperty()
-    # #stream = db.StringProperty()
-    # id = db.StringProperty()
-    # uploadDate = db.DateTimeProperty(auto_now_add=True)
-    # Date = db.DateProperty(auto_now_add=True)
+    price = ndb.FloatProperty()
+    picture_key = ndb.BlobKeyProperty()
 
+class UserModel(ndb.Model):
+    """ User model
+        store order and location history
+    """
+    user = ndb.UserProperty()
+    lastLocation = ndb.StringProperty()
+    orders = ndb.KeyProperty(kind='OrderModel', repeated=True)
+
+class OrderModel(ndb.Model):
+    """
+        order model
+    """
+    dish = ndb.KeyProperty(kind='DishModel')
+    number = ndb.IntegerProperty()
