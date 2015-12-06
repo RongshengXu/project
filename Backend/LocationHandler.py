@@ -14,17 +14,21 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 class LocationPage(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
-        url = users.create_logout_url(self.request.url)
-        url_linktext = 'Logout'
 
-        template_values = {
-                'user': user,
-                'url': url,
-                'url_linktext': url_linktext,
-            }
+        if (user):
+            url = users.create_logout_url(self.request.url)
+            url_linktext = 'Logout'
 
-        template = JINJA_ENVIRONMENT.get_template('templates/location.html')
-        self.response.write(template.render(template_values))
+            template_values = {
+                    'user': user,
+                    'url': url,
+                    'url_linktext': url_linktext,
+                }
+
+            template = JINJA_ENVIRONMENT.get_template('templates/location.html')
+            self.response.write(template.render(template_values))
+        else:
+            self.redirect('/')
 
 app = webapp2.WSGIApplication([
     ('/location', LocationPage)
