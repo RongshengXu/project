@@ -24,14 +24,14 @@ class MainPage(webapp2.RequestHandler):
             if (len(restaurant_query) > 0):
                 for restaurant in restaurant_query:
                     tmp = "/view_picture/%s" % restaurant.Blob_key
-                    restaurant_info.append((restaurant.name, tmp))
-            current_location = 'UT-Austin'              #get the current location in database
+                    tmp1 = "/viewdishes?name=%s" % restaurant.name
+                    restaurant_info.append((restaurant.name, tmp, tmp1))
+            # current_location = 'UT-Austin'              #get the current location in database
 
             template_values = {
                 'user': user,
                 'url': url,
                 'url_linktext': url_linktext,
-                'current_location': current_location,
                 'restaurant_query_len': len(restaurant_query),
                 'restaurant_info': restaurant_info
             }

@@ -20,30 +20,44 @@ handlers:
 
 - url: /restaurantregister
   script: RestaurantRegisterHandler.app
+  login: required
 
 - url: /view_picture/([^/]+)?
   script: handlers.ViewPictureHandler.app
+  login: required
 #  script: RestaurantRegisterHandler.app
 
+- url: /dish_handler
+  script: AddDishHandler.app
+
 # page handler
+- url: /viewdishes.*
+  script: ViewDishesHandler.app
+  login: required
+
+- url: /add_dish.*
+  script: AddDishHandler.app
+  login: required
 
 - url: /restaurantregister
   script: RestaurantRegisterHandler.app
+  login: required
 
 - url: /register
   script: RestaurantRegisterHandler.app
+  login: required
 
 - url: /viewnearby
   script: ViewNearbyHandler.app
+  login: required
 
 - url: /location
   script: LocationHandler.app
-
-- url: /option
-  script: OptionHandler.app
+  login: required
 
 - url: /main_restaurant
   script: Main_Restaurant.app
+  login: required
 
 - url: /main
   script: MainHandler.app
@@ -55,9 +69,12 @@ handlers:
 - url: /option
   script: OptionHandler.app
 
+- url: /error
+  script: ErrorHandler.app
+
 - url: /.*
   script: LoginHandler.app
-  #slogin: required
+  #login: required
 
 libraries:
 - name: webapp2

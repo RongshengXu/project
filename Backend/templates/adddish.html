@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>HUNGRY</title>
+    <!-- Bootstrap stuff -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
+    <script src="assets/js/location/locationpicker.jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <p class="navbar-brand">Hungry</p>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="main_restaurant">My Restaurants</a></li>
+                    <!--<li><a href="location">Location</a></li>-->
+                    <!--<li><a href="myorders">My Orders</a></li>-->
+                    <!--<li><a href="servicecenter">Service Center</a></li>-->
+                    <li><a href={{url}}>{{url_linktext}}</a><li></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="form-horizontal" style="width: 550px">
+
+            <form action={{upload_url}} method="post"  enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Restaurant Name:</label>
+                    <div class="col-sm-10">{{restaurant_name}}</div>
+                    <input type="hidden" class="form-control"name="restaurant_name" id="restaurant-name" value={{restaurant_name}} />
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Dish Name:</label>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="dish_name" id="dish-name"/></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Price:</label>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="dish_price" id="dish-price"/></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Cover Picture:</label>
+                    <div class="col-sm-10"><input type="file" class="form-control" name="dish_img" id="dish-img"/></div>
+                </div>
+
+                <div class="clearfix">&nbsp;</div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                        <input type="submit" class="btn btn-info" value="Submit Information">
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

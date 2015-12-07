@@ -32,7 +32,7 @@
 
     <div class="container">
         <div class="form-horizontal">
-            <form action="/viewnearby" method="get">
+            <form action="/viewnearby" method="post">
                 <div class="form-group">
                     <label class="col-md-1 control-label">Location:</label>
                     <div class="col-md-11"><input type="text" class="form-control" name="location" id="us3-address" placeholder="where are you?"/></div>
@@ -72,7 +72,7 @@
     <script>
         $('#us3').locationpicker({
             location: {latitude: 30.267153, longitude: -97.74306079999997},
-            radius: 300,
+            radius: 0,
             inputBinding: {
                 latitudeInput: $('#us3-lat'),
                 longitudeInput: $('#us3-lon'),

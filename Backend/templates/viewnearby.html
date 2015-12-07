@@ -6,5 +6,9 @@
 </head>
 <body>
     The following restaurants are within {{distance}} of {{location}}
+    {% for item in restaurant_info%}
+        <br>
+        {{item[0]}}
+    {% endfor %}
 </body>
 </html>

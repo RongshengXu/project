@@ -59,5 +59,5 @@ class ViewPictureHandler(blobstore_handlers.BlobstoreDownloadHandler):
 
 app = webapp2.WSGIApplication([
     ('/restaurantregister', RegisterPage),
-    ('/register', Register),
+    ('/register', Register)
 ], debug=True)

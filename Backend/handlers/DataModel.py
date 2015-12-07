@@ -29,14 +29,17 @@ class DishModel(ndb.Model):
     name = ndb.StringProperty()
     price = ndb.FloatProperty()
     picture_key = ndb.BlobKeyProperty()
+    # restaurant_key = ndb.KeyProperty(kind=RestaurantModel)
 
 class UserModel(ndb.Model):
     """ User model
         store order and location history
     """
     user = ndb.UserProperty()
-    lastLocation = ndb.StringProperty()
-    orders = ndb.KeyProperty(kind='OrderModel', repeated=True)
+    last_location = ndb.StringProperty()
+    last_latitude = ndb.FloatProperty()
+    last_longitude = ndb.FloatProperty()
+    orders = ndb.KeyProperty(kind='CartModel', repeated=True)
 
 class OrderModel(ndb.Model):
     """
