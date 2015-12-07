@@ -1,7 +1,17 @@
+function newComment(time, user_name, comment){
+    img_emelemt = '<img src="http://www.gnosko.com/dist/img/unknown.gif" class="avatar"/>';
+    comment_element = '<div class="post-comments"><P class="meta">' + time + ' ' + user_name + ' says:</p>' +
+            '<p>'+ comment + '</p></div>';
+
+    return img_emelemt + comment_element;
+}
+
 var main = function() {
     $('#post_btn').click(function(){
         var post = $('#post_box').val();
-        $('<li>').text(post).prependTo('#posts');
+        var current_time = new Date();
+        post = newComment(current_time.toUTCString(), 'User Name', post);
+        $('<li class="clearfix">').append(post).prependTo('#posts');
         $('#post_box').val('');
         $('.counter').text('500');
         $('#post_btn').addClass('disabled');
