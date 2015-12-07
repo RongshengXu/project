@@ -39,7 +39,6 @@ class UserInfo(webapp2.RequestHandler):
     def get(self):
         comment = self.request.get('comment')
         print comment
-        self.response.write(comment)
         userLogo = "http://www.gnosko.com/dist/img/unknown.gif"
         userInfo = {"name": users.get_current_user().nickname(), "logo": userLogo}
 
