@@ -38,8 +38,8 @@ class EvaluatePage(webapp2.RequestHandler):
 class UserInfo(webapp2.RequestHandler):
     def get(self):
         comment = self.request.get('comment')
-        print comment
         userLogo = "http://www.gnosko.com/dist/img/unknown.gif"
+        #userInfo = {"name": comment, "logo": userLogo}
         userInfo = {"name": users.get_current_user().nickname(), "logo": userLogo}
 
         # self.response.headers['Content-Type'] = 'application/json'
@@ -48,5 +48,5 @@ class UserInfo(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('.*/evaluate', EvaluatePage),
-    ('/getuserinfo.*', UserInfo)
+    ('/getuserinfo', UserInfo)
 ], debug=True)
