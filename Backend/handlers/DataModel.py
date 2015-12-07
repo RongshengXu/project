@@ -21,7 +21,9 @@ class RestaurantModel(ndb.Model):
 class CartModel(ndb.Model):
     """ cart to store current orders
     """
+    user = ndb.UserProperty()
     orders = ndb.KeyProperty(kind='OrderModel', repeated=True)
+    total = ndb.FloatProperty()
 
 class DishModel(ndb.Model):
     """ dish model

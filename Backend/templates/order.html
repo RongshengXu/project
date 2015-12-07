@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="/assets/css/common-style.css" />
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/simpleCart.js"></script>
+	<script>
+		simpleCart({
+			checkout: {
+				type: "PayPal" ,
+				email: "you@yours.com"
+			}
+		});
+	</script>
 </head>
 <body>
     <div class="container">
@@ -38,6 +47,17 @@
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">All Dishes</div>
+            <form action="/checkout" method="get">
+                <input type="submit" value="checkout">
+            </form>
+            <!--<p>-->
+            <!--Cart: <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)-->
+            <!--<br />-->
+            <!--<a href="javascript:;" class="simpleCart_empty">empty cart</a>-->
+            <!--<br />-->
+            <!--</p>-->
+
+
             <div class="panel-body">
                 {% if dish_query_len > 0%}
                     {% for item in dish_info %}
@@ -54,21 +74,22 @@
                                         <b>Price: {{item[1]}}</b>
                                     </div>
                                 </div>
-                            <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" >
-                            <input type="hidden" name="cmd" value="_cart">
-                            <input type="hidden" name="business" value="AYHVJAVLGD4MU">
-                            <input type="hidden" name="lc" value="C2">
-                            <input type="hidden" name="item_name" value={{item[0]}}>
-                            <input type="hidden" name="amount" value={{item[1]}}>
-                            <input type="hidden" name="currency_code" value="USD">
-                            <input type="hidden" name="button_subtype" value="products">
-                            <input type="hidden" name="tax_rate" value="8.240">
-                            <input type="hidden" name="shipping" value="5.00">
-                            <input type="hidden" name="add" value="1">
-                            <input type="hidden" name="bn" value="PP-ShopCartBF:btn_cart_LG.gif:NonHosted">
-                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                            </form>
+                                <form action="/cart" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="restaurant_name" value={{restaurant_name}}>
+                                    <input type="hidden" name="dish_name" value='{{item[0]}}'>
+                                    <input type="hidden" name="dish_price" value='{{item[1]}}'>
+                                    <input type="text" name="quantity" value="1">
+                                    <!--<div class="inc button">+</div><div class="dec button">-</div>-->
+                                    <!--<input type="hidden" name="item_id" value="BIA-2605">-->
+                                    <!--<input type="hidden" name="cid" value="000">-->
+                                    <input type="submit" value="Add to Cart">
+                                </form>
+                            <!--<div class="simpleCart_shelfItem">-->
+	                            <!--<h2 class="item_name"> {{item[0]}} </h2>-->
+	                            <!--<input type="text" value="1" class="item_Quantity">-->
+	                            <!--<span class="item_price">{{item[1]}}</span>-->
+		                        <!--<a class="item_add" href="javascript:;"> Add to Cart </a>-->
+                            <!--</div>-->
 
                             </div>
                         </div>
@@ -79,6 +100,25 @@
                     </div>
                 {% endif %}
             </div>
+            <!--<div class="simpleCart_items" >-->
+	        <!--</div>-->
+
+
+            <!--<div class="sc_demo_items" >-->
+            <!--</div>-->
+
+            <!--<br />-->
+            <!--SubTotal: <span id="simpleCart_total" class="simpleCart_total"></span> <br />-->
+            <!--Tax Rate: <span id="simpleCart_taxRate" class="simpleCart_taxRate"></span> <br />-->
+            <!--Tax: <span id="simpleCart_tax" class="simpleCart_tax"></span> <br />-->
+            <!--Shipping: <span id="simpleCart_shipping" class="simpleCart_shipping"></span> <br />-->
+            <!-------------------------------<br />-->
+            <!--Final Total: <span id="simpleCart_grandTotal" class="simpleCart_grandTotal"></span> <br />-->
+
+            <!--<a href="javascript:;" class="simpleCart_checkout">checkout</a>-->
+
+            <!--<div id="test_id"></div>-->
+
         </div>
     </div>
 

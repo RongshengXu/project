@@ -34,8 +34,15 @@ handlers:
   script: AddDishHandler.app
   login: required
 
-
 # page handler
+- url: /viewcart
+  script: CartHandler.app
+  login: required
+
+- url: /cart
+  script: CartHandler.app
+  login: required
+
 - url: /viewdishes.*
   script: ViewDishesHandler.app
   login: required
