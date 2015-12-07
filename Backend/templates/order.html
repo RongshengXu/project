@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>HUNGRY|order</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/common-style.css" />
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <p class="navbar-brand">Hungry</p>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="main">Main</a></li>
+                    <li><a href="/location">Location</a></li>
+                    <li><a href="/myorders">My Orders</a></li>
+                    <li><a href="/servicecenter">Service Center</a></li>
+                    <li><a href="/main_restaurant">Log as owner of restaurant</a></li>
+                    <li><a href={{url}}>{{url_linktext}}</a><li></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="col-md-6">
+            <span>Restaurant Name:</span>
+            <span class="text-info">{{restaurant_name}}</span>
+        </div>
+    </div>
+    <div class="gap_small"></div>
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">All Dishes</div>
+            <div class="panel-body">
+                {% if dish_query_len > 0%}
+                    {% for item in dish_info %}
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <img src={{item[2]}} class="img-responsive img-rounded displayed"/>
+                                </div>
+                                <div class="panel-footer">
+                                    <div style="text-align: center" class="list-group-item-heading">
+                                        <b>Name: {{item[0]}}</b>
+                                    </div>
+                                    <div style="text-align: center" class="list-group-item-heading">
+                                        <b>Price: {{item[1]}}</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div style="text-align: center" class="list-group-item-heading">
+                        <p>No Restaurant are available</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

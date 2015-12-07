@@ -29,6 +29,8 @@ handlers:
 
 - url: /dish_handler
   script: AddDishHandler.app
+  login: required
+
 
 # page handler
 - url: /viewdishes.*
@@ -54,6 +56,11 @@ handlers:
 - url: /location
   script: LocationHandler.app
   login: required
+
+- url: /order.*
+  script: OrderHandler.app
+  login: required
+
 
 - url: /main_restaurant
   script: Main_Restaurant.app

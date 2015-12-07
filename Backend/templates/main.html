@@ -22,6 +22,7 @@
                     <li><a href="/location">Location</a></li>
                     <li><a href="/myorders">My Orders</a></li>
                     <li><a href="/servicecenter">Service Center</a></li>
+                    <li><a href="/main_restaurant">Log as owner of restaurant</a></li>
                     <li><a href={{url}}>{{url_linktext}}</a><li></li>
                 </ul>
             </div>
@@ -74,14 +75,16 @@
                     {% for item in restaurant_info %}
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <img src={{item[1]}} class="img-responsive img-rounded displayed"/>
-                                </div>
-                                <div class="panel-footer">
-                                    <div style="text-align: center" class="list-group-item-heading">
-                                        <b>{{item[0]}}</b>
+                                <a href={{item[4]}}>
+                                    <div class="panel-body">
+                                        <img src={{item[1]}} class="img-responsive img-rounded displayed"/>
                                     </div>
-                                </div>
+                                    <div class="panel-footer">
+                                        <div style="text-align: center" class="list-group-item-heading">
+                                            <b>{{item[0]}}</b>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     {% endfor %}

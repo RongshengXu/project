@@ -1,9 +1,6 @@
+__author__ = 'rongshengxu'
+
 from google.appengine.api import users
-
-from google.appengine.ext import db
-from google.appengine.ext import ndb
-from google.appengine.ext import blobstore
-
 from handlers.DataModel import UserModel
 import webapp2
 
@@ -36,7 +33,8 @@ class MainPage(webapp2.RequestHandler):
                         a = restaurant.latitude
                         l = restaurant.longitude
                         tmp = "/view_picture/%s" % restaurant.Blob_key
-                        restaurant_info.append((restaurant.name, tmp, a, l))
+                        tmp1 = "/order?name=%s" % restaurant.name
+                        restaurant_info.append((restaurant.name, tmp, a, l, tmp1))
                 restaurant_info.sort(key=lambda tup: (tup[2]-lat)**2+(tup[3]-lg)**2)
                 # current_location = 'UT-Austin'              #get the current location in database
                 template_values = {
