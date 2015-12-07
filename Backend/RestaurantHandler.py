@@ -8,6 +8,7 @@ import webapp2
 
 import os
 import jinja2
+import json
 from handlers.DataModel import RestaurantModel
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -33,6 +34,16 @@ class EvaluatePage(webapp2.RequestHandler):
         else:
             self.redirect('/')
 
+class UserInfo(webapp2.RequestHandler):
+    def get(self):
+        userLogo = "http://www.gnosko.com/dist/img/unknown.gif"
+        userInfo = {"name": users.get_current_user().nickname(), "logo": userLogo}
+
+        # self.response.headers['Content-Type'] = 'application/json'
+        userInfo_json = json.dumps(userInfo)
+        self.response.write(userInfo_json)
+
 app = webapp2.WSGIApplication([
-    ('.*/evaluate', EvaluatePage)
+    ('.*/evaluate', EvaluatePage),
+    ('/getuserinfo.*', UserInfo),
 ], debug=True)
