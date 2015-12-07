@@ -6,12 +6,13 @@ function newComment(time, user_name, comment){
     return img_emelemt + comment_element;
 }
 
-function getUserName(){
+function getUserName(time, comment){
     var username = "Default";
     $.ajax({
         type: 'GET',
         dataType: 'json',
         url: '/getuserinfo',
+        data: {'time': time, 'comment': comment},
         async: false,
         success: function(data){
             username = data.name;
@@ -25,7 +26,8 @@ var main = function() {
     $('#post_btn').click(function(){
         var post = $('#post_box').val();
         var current_time = new Date();
-        post = newComment(current_time.toUTCString(), getUserName(), post);
+
+        post = newComment(current_time.toUTCString(), getUserName(current_time, post), post);
         $('<li class="clearfix">').append(post).prependTo('#posts');
         $('#post_box').val('');
         $('.counter').text('500');
