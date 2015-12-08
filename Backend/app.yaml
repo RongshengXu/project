@@ -18,7 +18,7 @@ handlers:
   static_dir: assets/images
 
 # process handlers
-- url: .*/evaluate
+- url: /evaluate
   script: RestaurantHandler.app
 
 - url: /getuserinfo.*

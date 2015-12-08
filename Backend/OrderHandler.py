@@ -25,7 +25,9 @@ class PlaceOrderHandler(webapp2.RequestHandler):
                 pic_url = '/view_picture/%s' % dish.picture_key
                 dish_info.append((dish.name, dish.price, pic_url))
         template = JINJA_ENVIRONMENT.get_template('templates/order.html')
+        evaluate_url = "/evaluate?name=%s" % restaurant_name
         template_values = {
+            'evaluate_url': evaluate_url,
             'dish_query_len': len(dish_query),
             'restaurant_name': restaurant_name,
             'dish_info': dish_info

@@ -20,12 +20,14 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 class EvaluatePage(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
-
+        restaurant_name = self.request.get('name')
         if (user):
             url = users.create_logout_url(self.request.url)
             url_linktext = 'Logout'
-
+            order_url = "/order?name=%s" % restaurant_name
             template_values = {
+                'order_url': order_url,
+                'restaurant_name': restaurant_name,
                 'user': user,
                 'url': url,
                 'url_linktext': url_linktext,
@@ -47,6 +49,6 @@ class UserInfo(webapp2.RequestHandler):
         self.response.write(userInfo_json)
 
 app = webapp2.WSGIApplication([
-    ('.*/evaluate', EvaluatePage),
+    ('/evaluate', EvaluatePage),
     ('/getuserinfo', UserInfo)
 ], debug=True)
