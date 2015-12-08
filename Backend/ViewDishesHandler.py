@@ -4,7 +4,7 @@ from google.appengine.api import users
 
 import webapp2
 
-from handlers.DataModel import RestaurantModel, DishModel
+from handlers.DataModel import RestaurantModel, DishModel, CartModel
 
 import os
 import jinja2
@@ -19,6 +19,17 @@ class ViewDishHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         restaurant_name = self.request.get('name')
+
+        # generate a cart
+        cart_query = CartModel.query(CartModel.restaurant_name==restaurant_name, CartModel.user==user).fetch()
+        if (len(cart_query)<1):
+            cart = CartModel()
+            cart.user = user
+            cart.restaurant_name = restaurant_name
+            cart.orders = []
+            cart.total = 0
+            cart.put()
+
         # self.response.write(restaurant_name)
         restaurant = RestaurantModel.query(RestaurantModel.name==restaurant_name, RestaurantModel.owner==user).fetch()[0]
         key = restaurant.key
@@ -29,7 +40,7 @@ class ViewDishHandler(webapp2.RequestHandler):
                 tmp = "/view_picture/%s" % dish.picture_key
                 dish_info.append((dish.name, dish.price, tmp))
         part =  urllib.urlencode({'name': restaurant_name})
-        add_url = '/add_dish%s' % part
+        add_url = '/add_dish?%s' % part
         # self.response.write(restaurant_name)
         template = JINJA_ENVIRONMENT.get_template('templates/viewdishes.html')
         template_values ={

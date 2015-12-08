@@ -37,14 +37,14 @@ class MainPage(webapp2.RequestHandler):
                         restaurant_info.append((restaurant.name, tmp, a, l, tmp1))
                 restaurant_info.sort(key=lambda tup: (tup[2]-lat)**2+(tup[3]-lg)**2)
 
-                # Initialize a cart for this user
-                cart_query = CartModel.query(CartModel.user==user).fetch()
-                if (len(cart_query)<1):
-                    cart = CartModel()
-                    cart.user = user
-                    cart.orders = []
-                    cart.total = 0.0
-                    cart.put()
+                # # Initialize a cart for this user
+                # cart_query = CartModel.query(CartModel.user==user).fetch()
+                # if (len(cart_query)<1):
+                #     cart = CartModel()
+                #     cart.user = user
+                #     cart.orders = []
+                #     cart.total = 0.0
+                #     cart.put()
 
                 # current_location = 'UT-Austin'              #get the current location in database
                 template_values = {
