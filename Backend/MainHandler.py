@@ -7,6 +7,7 @@ import webapp2
 import os
 import jinja2
 from handlers.DataModel import RestaurantModel, CartModel
+import urllib
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -33,7 +34,8 @@ class MainPage(webapp2.RequestHandler):
                         a = restaurant.latitude
                         l = restaurant.longitude
                         tmp = "/view_picture/%s" % restaurant.Blob_key
-                        tmp1 = "/order?name=%s" % restaurant.name
+                        part = urllib.urlencode({'name':restaurant.name})
+                        tmp1 = "/order?%s" % part
                         restaurant_info.append((restaurant.name, tmp, a, l, tmp1))
                 restaurant_info.sort(key=lambda tup: (tup[2]-lat)**2+(tup[3]-lg)**2)
 
