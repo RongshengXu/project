@@ -15,7 +15,6 @@ class RestaurantModel(ndb.Model):
     # coverPage = ndb.BlobProperty()
     Blob_key = ndb.BlobKeyProperty()
 
-    comments = ndb.StringProperty(repeated=True)
     TotalScore = ndb.FloatProperty()
     numberOfScores = ndb.IntegerProperty()
     free_shipping = ndb.FloatProperty()
