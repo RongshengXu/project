@@ -57,3 +57,10 @@ class OrderModel(ndb.Model):
     restaurant_name = ndb.StringProperty()
     dish = ndb.KeyProperty(kind='DishModel')
     number = ndb.IntegerProperty()
+
+class CommentModel(ndb.Model):
+    """     comment model
+    """
+    user = ndb.UserProperty()
+    restaurant_name = ndb.StringProperty()
+    createTime = ndb.DateTimeProperty(auto_now_add=True)
