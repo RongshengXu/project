@@ -8,6 +8,55 @@
     <link rel="stylesheet" href="/assets/css/common-style.css" />
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('button').click(function(){
+                //$('#test').html("here");
+                var $button = $(this);
+                var oldValue = $button.parent().find("input").val();
+
+                if ($button.text() == "+") {
+                    var newVal = parseInt(oldValue) + 1;
+                    //$button.parent().parent().parent().find("td:first").css({"color":"red"});
+                    var n1 = $button.parent().parent().parent().find("td:first");
+                    n1.css({"color":"red"});
+                    $.ajax({
+                        type: 'GET',
+                        dataType: 'json',
+                        url: '/increment',
+                        data: {'dish_name': n1.text()},
+                        async: true,
+                        success: function(data){
+                            $('#test').html(data.name);
+                        },
+                        error:function(exception){alert('Exeption:'+exception);}
+                    });
+                } else if ($button.text() == "-") {
+                    if (oldValue > 0) {
+                        var newVal = parseInt(oldValue) - 1;
+                        //$button.parent().parent().parent().find("td:first").css({"color":"blue"});
+                        var n2 = $button.parent().parent().parent().find("td:first");
+                        n2.css({"color":"blue"});
+                        $.ajax({
+                            type: 'GET',
+                            dataType: 'json',
+                            url: '/decrement',
+                            data: {'dish_name': n2.text()},
+                            async: true,
+                            success: function(data){
+                                $('#test').html(data.name);
+                            },
+                            error:function(exception){alert('Exeption:'+exception);}
+                        });
+                    } else {
+                        newVal = 0;
+                    }
+                }
+
+                $button.parent().find("input").val(newVal);
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -28,8 +77,13 @@
             </div>
         </nav>
     </div>
-
+    <div id="test"></div>
     <div class="panel-body">
+        <div>
+            <button style="height:25px;width:25px">-</button>
+            <input type="text" value="1" style="height:25px;width:25px">
+            <button id="add" style="height:25px;width:25px">+</button>
+        </div>
         <table class="table">
         <thead>
           <tr>
@@ -48,21 +102,16 @@
                         <tr>
                             <td>{{item[0]}}</td>
                             <td>{{item[1]}}</td>
-                            <td>{{item[2]}}</td>
+                            <td>
+                                <div>
+                                    <button style="height:25px;width:25px">-</button>
+                                    <input type="text" value="{{item[2]}}" style="height:25px;width:25px">
+                                    <button style="height:25px;width:25px">+</button>
+                                </div>
                             </td>
+                            <td><a id=""> Cancel </a></td>
+                            <td hidden="hidden"></td>
                         </tr>
-                                    <!--<div style="text-align: left" class="list-group-item-heading">-->
-                                        <!--<b>Name: {{item[0]}}</b>-->
-                                    <!--</div>-->
-                                    <!--<div style="text-align: center" class="list-group-item-heading">-->
-                                        <!--<b>Price: {{item[1]}}</b>-->
-                                    <!--</div>-->
-                                    <!--<div style="text-align: right" class="list-group-item-heading">-->
-                                        <!--<b>Price: {{item[2]}}</b>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
                     {% endfor %}
                 {% else %}
                     <div style="text-align: center" class="list-group-item-heading">
@@ -70,8 +119,22 @@
                     </div>
                 {% endif %}
             </tbody>
+
         </table>
     </div>
-
 </body>
+<script>
+    function decrement(a) {
+        $.ajax$.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: '/decrement',
+            data: {'dish_name': a},
+            async: false,
+            success: function(data){
+                var a = data;
+            }
+        });
+    }
+</script>
 </html>

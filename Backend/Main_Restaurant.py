@@ -4,6 +4,7 @@ import webapp2
 
 import os
 import jinja2
+import urllib
 from handlers.DataModel import RestaurantModel
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -23,11 +24,12 @@ class MainPage(webapp2.RequestHandler):
             restaurant_info = []
             if (len(restaurant_query) > 0):
                 for restaurant in restaurant_query:
+                    p1 = urllib.urlencode({'name':restaurant.name})
                     tmp = "/view_picture/%s" % restaurant.Blob_key
-                    tmp1 = "/viewdishes?name=%s" % restaurant.name
+                    tmp1 = "/viewdishes?%s" % p1
                     restaurant_info.append((restaurant.name, tmp, tmp1))
             # current_location = 'UT-Austin'              #get the current location in database
-
+            # self.response.write(restaurant_info)
             template_values = {
                 'user': user,
                 'url': url,

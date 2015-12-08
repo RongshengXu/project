@@ -31,7 +31,18 @@ handlers:
 - url: /view_picture/([^/]+)?
   script: handlers.ViewPictureHandler.app
   login: required
-#  script: RestaurantRegisterHandler.app
+
+#- url: /test
+#  script: CheckoutHandler.app
+#  login: required
+
+- url: /increment
+  script: CheckoutHandler.app
+  login: required
+
+- url: /decrement
+  script: CheckoutHandler.app
+  login: required
 
 - url: /dish_handler
   script: AddDishHandler.app

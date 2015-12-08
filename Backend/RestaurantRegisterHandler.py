@@ -43,6 +43,10 @@ class Register(blobstore_handlers.BlobstoreUploadHandler):
         restaurant.latitude = float(self.request.get('latitude'))
         restaurant.longitude = float(self.request.get('longitude'))
         restaurant.Blob_key = upload.key()
+        restaurant.comments = []
+        restaurant.numberOfScores = 0
+        restaurant.free_shipping = float(self.request.get('freeshipping'))
+        restaurant.shipping_fee = float(self.request.get('shipping'))
         restaurant.put()
         # self.redirect('/view_picture/%s' % restaurant.Blob_key)
         # img = self.request.get('img')
