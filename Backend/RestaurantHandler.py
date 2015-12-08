@@ -10,6 +10,7 @@ import sys
 import os
 import jinja2
 import json
+import datetime
 from handlers.DataModel import RestaurantModel
 from handlers.DataModel import CommentModel
 
@@ -34,10 +35,13 @@ class EvaluatePage(webapp2.RequestHandler):
             # Get all the comments to the restaurant
             comments_list = []
             comments_query = CommentModel.query(CommentModel.restaurant_name==restaurant_name).order(-CommentModel.createTime).fetch()
+            comment_time = datetime.datetime.now()
 
             if (len(comments_query)>0):
                 for comment in comments_query:
-                    comments_list.append((comment.createTime, comment.user.nickname(), comment.content))
+                    comment_time = "{:%a, %d %b %Y %H:%M:%S GMT}".format(comment.createTime)
+
+                    comments_list.append((comment_time, comment.user.nickname(), comment.content))
 
             num_of_comments = len(comments_list)
             template_values = {
