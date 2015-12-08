@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>HUNGRY|order</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/common-style.css" />
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('button').click(function(){
+                //$('#test').html("here");
+                var $button = $(this);
+                var oldValue = $button.parent().find("input").val();
+                var name = $button.parent().parent().parent().find("td:eq(1)");
+                var restaurant = $button.parent().parent().parent().find("td:eq(0)");
+                var id = $button.parent().parent().parent().find("td:eq(5)");
+
+                if ($button.text() == "+") {
+                    var newVal = parseInt(oldValue) + 1;
+                    //var n1 = $button.parent().parent().parent().find("td:eq(1)");
+                    name.css({"color":"red"});
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        url: '/increment',
+                        data: {
+                                'dish_name': name.text(),
+                                'restaurant_name': restaurant.text(),
+                                'id': id.text()
+                              },
+                        async: true,
+                        success: function(data){
+                            $('#test').html(data.name + ' ' + data.other + ' ' + data.id);
+                        },
+                        error:function(exception){alert('Exeption:'+exception);}
+                    });
+                } else if ($button.text() == "-") {
+                    if (oldValue > 0) {
+                        var newVal = parseInt(oldValue) - 1;
+                        //var n2 = $button.parent().parent().parent().find("td:eq(1)");
+                        name.css({"color":"blue"});
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            url: '/decrement',
+                            data: {
+                                    'dish_name': name.text(),
+                                    'restaurant_name': restaurant.text(),
+                                    'id': id.text()
+                                  },
+                            async: true,
+                            success: function(data){
+                                $('#test').html(data.name + ' ' + data.other + ' ' + data.id);
+                            },
+                            error:function(exception){alert('Exeption:'+exception);}
+                        });
+                    } else {
+                        newVal = 0;
+                    }
+                }
+
+                $button.parent().find("input").val(newVal);
+            });
+            $('#paybutton')
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <p class="navbar-brand">Hungry</p>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="main">Main</a></li>
+                    <li><a href="/location">Location</a></li>
+                    <li><a href="/myorders">My Orders</a></li>
+                    <li><a href="/servicecenter">Service Center</a></li>
+                    <li><a href="/main_restaurant">Log as owner of restaurant</a></li>
+                    <li><a href="/viewcart">My Carts</a></li>
+                    <li><a href={{url}}>{{url_linktext}}</a><li></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div id="test"></div>
+    <div class="container">
+        <div>Restaurant: {{restaurant_name}}</div>
+        <!--<div>-->
+            <!--<button style="height:25px;width:25px">-</button>-->
+            <!--<input type="text" value="1" style="height:25px;width:25px">-->
+            <!--<button id="add" style="height:25px;width:25px">+</button>-->
+        <!--</div>-->
+        {% if cart_query_len > 0%}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <!--<th>Restaurant Name</th>-->
+                        <th>Dish Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_info %}
+                        <!--<div class="col-md-3 col-sm-6 col-xs-12">-->
+                            <!--<div class="panel panel-default">-->
+                                <!--<div class="panel-footer">-->
+                        <tr>
+                            <td hidden="hidden">{{restaurant_name}}</td>
+                            <td>{{item[0]}}</td>
+                            <td>{{item[1]}}</td>
+                            <td>
+                                <div>
+                                    <button style="height:25px;width:25px">-</button>
+                                    <input type="text" value="{{item[2]}}" style="height:25px;width:25px">
+                                    <button style="height:25px;width:25px">+</button>
+                                </div>
+                            </td>
+                            <td> <a href='{{item[4]}}'> Cancel </a></td>
+                            <td hidden="hidden">{{item[3]}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div style="text-align: center" class="list-group-item-heading">
+                <p>No Dish is available</p>
+            </div>
+        {% endif %}
+        <!--<div id="paybutton">{{paypal_button|safe}}</div>-->
+        <div>
+            <a href="/confirm">confirm and checkout</a>
+        </div>
+    </div>
+</body>
+<script>
+    function decrement(a) {
+        $.ajax$.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: '/decrement',
+            data: {'dish_name': a},
+            async: false,
+            success: function(data){
+                var a = data;
+            }
+        });
+    }
+</script>
+</html>

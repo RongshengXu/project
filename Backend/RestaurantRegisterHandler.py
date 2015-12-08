@@ -47,6 +47,7 @@ class Register(blobstore_handlers.BlobstoreUploadHandler):
         restaurant.numberOfScores = 0
         restaurant.free_shipping = float(self.request.get('freeshipping'))
         restaurant.shipping_fee = float(self.request.get('shipping'))
+        restaurant.payment = self.request.get('paypal')
         restaurant.put()
         # self.redirect('/view_picture/%s' % restaurant.Blob_key)
         # img = self.request.get('img')
