@@ -1,6 +1,7 @@
 __author__ = 'rongshengxu'
 
 from google.appengine.api import users
+from google.appengine.ext import ndb
 from handlers.DataModel import UserModel
 import webapp2
 
@@ -14,40 +15,46 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 
 class CartHandler(webapp2.RequestHandler):
-    def post(self):
+    def get(self):
         user = users.get_current_user()
         restaurant_name = self.request.get('restaurant_name')
         dish_name = self.request.get('dish_name')
         dish_price = float(self.request.get('dish_price'))
         quantity = int(self.request.get('quantity'))
-        # self.response.write(restaurant_name)
-                            # + " " + dish_name + " " + dish_price + " " + quantity)
+        found = False
         restaurant = RestaurantModel.query(RestaurantModel.name==restaurant_name).fetch()[0]
-        dish_query = DishModel.query(ancestor=restaurant.key).fetch()
+        dish_query = DishModel.query(DishModel.name==dish_name, ancestor=restaurant.key).fetch()
+        # self.response.write(dish_query[0].name)
         if (len(dish_query)>0):
-            # name = []
-            for dish in dish_query:
-                # name.append(dish.name)
-                # self.response.write(dish.name)
-                # self.response.write(dish_name)
-                if dish_name == dish.name:
-                    # self.response.write("get!!")
-                    order = OrderModel()
-                    order.dish = dish.key
-                    order.number = quantity
-                    order_key = order.put()
-                    cart_query = CartModel.query(CartModel.user==user).fetch()
-                    if (len(cart_query)>0):
-                        cart = cart_query[0]
-                    else:
-                        cart = CartModel()
-                        cart.user = user
-                        cart.orders = []
-                        cart.total = 0.0
-                    cart.orders.append(order_key)
-                    cart.total = cart.total + dish.price*quantity
+            dish = dish_query[0]
+            cart_query = CartModel.query(CartModel.user==user).fetch()
+            if (len(cart_query)>0):
+                cart = cart_query[0]
+                name = []
+                for order_key in cart.orders:
+                    # order = OrderModel.get_by_id(order_key.id())
+                    order = order_key.get()
+                    dish_tmp = order.dish.get()
+                    # name.append(order.dish.get().name)
+                    if (dish_tmp.name==dish_name):
+                        # self.response.write("get!!")
+                        order.number = order.number + quantity
+                        order.put()
+                        cart.total = cart.total + dish_price*quantity
+                        cart.put()
+                        found = True
+                        self.redirect("/order?name=%s" % restaurant.name)
+                if (found == False):
+                    new_order = OrderModel()
+                    new_order.number = quantity
+                    new_order.dish = dish.key
+                    key = new_order.put()
+                    cart.orders.append(key)
+                    cart.total = cart.total + dish_price*quantity
                     cart.put()
                     self.redirect("/order?name=%s" % restaurant.name)
+            else:
+                self.redirect('/main')
         else:
             self.redirect('/main')
 

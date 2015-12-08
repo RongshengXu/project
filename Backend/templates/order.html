@@ -74,7 +74,7 @@
                                         <b>Price: {{item[1]}}</b>
                                     </div>
                                 </div>
-                                <form action="/cart" method="post" enctype="multipart/form-data">
+                                <form action="/cart" method="get" enctype="multipart/form-data">
                                     <input type="hidden" name="restaurant_name" value={{restaurant_name}}>
                                     <input type="hidden" name="dish_name" value='{{item[0]}}'>
                                     <input type="hidden" name="dish_price" value='{{item[1]}}'>

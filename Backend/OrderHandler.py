@@ -17,7 +17,7 @@ class PlaceOrderHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         restaurant_name = self.request.get('name')
-        restaurant = RestaurantModel.query(RestaurantModel.name==restaurant_name, RestaurantModel.owner==user).fetch()[0]
+        restaurant = RestaurantModel.query(RestaurantModel.name==restaurant_name).fetch()[0]
         dish_query = DishModel.query(ancestor=restaurant.key).fetch()
         dish_info = []
         if (len(dish_query)>0):
