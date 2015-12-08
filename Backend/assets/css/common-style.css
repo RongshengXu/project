@@ -92,6 +92,27 @@ img.single_pic {
     color: #fff;
 }
 
+.jumbotron .restaurant_remark{
+    position: relative;
+    top: 20px;
+}
+
+.jumbotron .restaurant_remark th{
+    position: relative;
+    color: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 15px;
+    font-family: 'Shift', sans-serif;
+    font-weight: bold;
+}
+
+.jumbotron .restaurant_remark td {
+    color: #fff;
+    font-size: 15px;
+    padding-top: 10px;
+}
+
 .counter {
   display: inline;
   margin-top: 0;
