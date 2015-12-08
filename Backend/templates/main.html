@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/assets/css/common-style.css" />
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/star_rating.js"></script>
 </head>
 <body>
     <div class="container">
@@ -83,6 +84,15 @@
                                     <div class="panel-footer">
                                         <div style="text-align: center" class="list-group-item-heading">
                                             <b>{{item[0]}}</b>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-4">
+                                                <span class="stars">{{item[5]}}</span>
+                                            </div>
+{#                                            <div class="col-md-5">#}
+{#                                                <span>{{item[5]}}</span>#}
+{#                                            </div>#}
                                         </div>
                                     </div>
                                 </a>
