@@ -36,7 +36,8 @@ class MainPage(webapp2.RequestHandler):
                         tmp = "/view_picture/%s" % restaurant.Blob_key
                         part = urllib.urlencode({'name':restaurant.name})
                         tmp1 = "/order?%s" % part
-                        restaurant_info.append((restaurant.name, tmp, a, l, tmp1))
+                        score = restaurant.TotalScore
+                        restaurant_info.append((restaurant.name, tmp, a, l, tmp1, score))
                 restaurant_info.sort(key=lambda tup: (tup[2]-lat)**2+(tup[3]-lg)**2)
 
                 # # Initialize a cart for this user

@@ -97,6 +97,17 @@
     <div class="container">
         <div class="blog-comment">
             <ul id="posts" class="comments">
+                {% if num_of_comments > 0%}
+                    {% for item in comments_list %}
+                        <li class="clearfix">
+                            <img src="http://www.gnosko.com/dist/img/unknown.gif" class="avatar"/>
+                            <div class="post-comments">
+                                <p class="meta"> {{item[0]}} <b>{{item[1]}}</b> says:</p>
+                                <p>{{item[2]}}</p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endif %}
             </ul>
         </div>
     </div>

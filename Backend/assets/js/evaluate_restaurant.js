@@ -1,6 +1,6 @@
 function newComment(time, user_name, comment){
     img_emelemt = '<img src="http://www.gnosko.com/dist/img/unknown.gif" class="avatar"/>';
-    comment_element = '<div class="post-comments"><P class="meta">' + time + ' ' + user_name + ' says:</p>' +
+    comment_element = '<div class="post-comments"><P class="meta">' + time + ' <b>' + user_name + '</b> says:</p>' +
             '<p>'+ comment + '</p></div>';
 
     return img_emelemt + comment_element;

@@ -15,7 +15,6 @@ class RestaurantModel(ndb.Model):
     # coverPage = ndb.BlobProperty()
     Blob_key = ndb.BlobKeyProperty()
 
-    comments = ndb.StringProperty(repeated=True)
     TotalScore = ndb.FloatProperty()
     numberOfScores = ndb.IntegerProperty()
     free_shipping = ndb.FloatProperty()
@@ -57,3 +56,12 @@ class OrderModel(ndb.Model):
     restaurant_name = ndb.StringProperty()
     dish = ndb.KeyProperty(kind='DishModel')
     number = ndb.IntegerProperty()
+
+class CommentModel(ndb.Model):
+    """     comment model
+    """
+    user = ndb.UserProperty()
+    restaurant_name = ndb.StringProperty()
+    createTime = ndb.DateTimeProperty(auto_now_add=True)
+    content = ndb.StringProperty()
+
