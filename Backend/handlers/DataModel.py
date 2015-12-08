@@ -64,4 +64,5 @@ class CommentModel(ndb.Model):
     user = ndb.UserProperty()
     restaurant_name = ndb.StringProperty()
     createTime = ndb.DateTimeProperty(auto_now_add=True)
+    content = ndb.StringProperty()
 
