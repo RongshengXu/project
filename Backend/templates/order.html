@@ -84,62 +84,108 @@
     <!--</div>-->
     <!--<div class="gap_small"></div>-->
 
+    <div class="gap_addchart"></div>
+
     <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-heading">All Dishes</div>
-            <form action="/checkout" method="get">
-                <input type="submit" value="checkout">
-            </form>
-            <!--<p>-->
-            <!--Cart: <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)-->
-            <!--<br />-->
-            <!--<a href="javascript:;" class="simpleCart_empty">empty cart</a>-->
-            <!--<br />-->
-            <!--</p>-->
-
-
-            <div class="panel-body">
-                {% if dish_query_len > 0%}
-                    {% for item in dish_info %}
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <img src={{item[2]}} class="img-responsive img-rounded displayed"/>
-                                </div>
-                                <div class="panel-footer">
-                                    <div style="text-align: center" class="list-group-item-heading">
-                                        <b>Name: {{item[0]}}</b>
-                                    </div>
-                                    <div style="text-align: center" class="list-group-item-heading">
-                                        <b>Price: {{item[1]}}</b>
-                                    </div>
-                                </div>
-                                <form action="/cart" method="get" enctype="multipart/form-data">
-                                    <input type="hidden" name="restaurant_name" value='{{restaurant_name}}'>
-                                    <input type="hidden" name="dish_name" value='{{item[0]}}'>
-                                    <input type="hidden" name="dish_price" value='{{item[1]}}'>
-                                    <input type="text" name="quantity" value="1">
-                                    <!--<div class="inc button">+</div><div class="dec button">-</div>-->
-                                    <!--<input type="hidden" name="item_id" value="BIA-2605">-->
-                                    <!--<input type="hidden" name="cid" value="000">-->
-                                    <input type="submit" value="Add to Cart">
-                                </form>
-                            <!--<div class="simpleCart_shelfItem">-->
-	                            <!--<h2 class="item_name"> {{item[0]}} </h2>-->
-	                            <!--<input type="text" value="1" class="item_Quantity">-->
-	                            <!--<span class="item_price">{{item[1]}}</span>-->
-		                        <!--<a class="item_add" href="javascript:;"> Add to Cart </a>-->
-                            <!--</div>-->
-
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <div style="text-align: center" class="list-group-item-heading">
-                        <p>No Restaurant are available</p>
+        {% if dish_query_len > 0%}
+            {% for item in dish_info %}
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-3 menu_block">
+                        <img src="{{item[2]}}" class="img-responsive img-rounded food_pic">
                     </div>
-                {% endif %}
-            </div>
+                    <div class="col-md-5  menu_block">
+                        <div class="row">
+                            <b>{{item[0]}}</b>
+                        </div>
+                        <div class="gap_middle"></div>
+                        <div class="row">
+                            <p>{{item[1]}} $</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3  menu_block pull-right">
+                        <div class="row">
+                            <form action="/cart" method="get" enctype="multipart/form-data">
+                                <input type="hidden" name="restaurant_name" value='{{restaurant_name}}'>
+                                <input type="hidden" name="dish_name" value='{{item[0]}}'>
+                                <input type="hidden" name="dish_price" value='{{item[1]}}'>
+                                <input type="text" class="form-control" name="quantity" value="1">
+                                <!--<div class="inc button">+</div><div class="dec button">-</div>-->
+                                <!--<input type="hidden" name="item_id" value="BIA-2605">-->
+                                <!--<input type="hidden" name="cid" value="000">-->
+                                <div class="gap_addchart"></div>
+                                <input class="pull-right" type="submit" value="Add to Cart">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+{#    <div class="container">#}
+{#        <div class="panel panel-default">#}
+{#            <div class="panel-heading">#}
+{#                <div class="row">#}
+{#                    <div class="col-md-2">#}
+{#                        <p>All Dishes</p>#}
+{#                    </div>#}
+{#                    <div class="col-md-1 pull-right">#}
+{#                        <form action="/checkout" method="get">#}
+{#                            <input type="submit" class="btn-primary" value="checkout">#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <!--<p>-->#}
+{#            <!--Cart: <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)-->#}
+{#            <!--<br />-->#}
+{#            <!--<a href="javascript:;" class="simpleCart_empty">empty cart</a>-->#}
+{#            <!--<br />-->#}
+{#            <!--</p>-->#}
+{##}
+{##}
+{#            <div class="panel-body">#}
+{#                {% if dish_query_len > 0%}#}
+{#                    {% for item in dish_info %}#}
+{#                        <div class="col-md-3 col-sm-6 col-xs-12">#}
+{#                            <div class="panel panel-default">#}
+{#                                <div class="panel-body">#}
+{#                                    <img src={{item[2]}} class="img-responsive img-rounded displayed"/>#}
+{#                                </div>#}
+{#                                <div class="panel-footer">#}
+{#                                    <div style="text-align: center" class="list-group-item-heading">#}
+{#                                        <b>Name: {{item[0]}}</b>#}
+{#                                    </div>#}
+{#                                    <div style="text-align: center" class="list-group-item-heading">#}
+{#                                        <b>Price: {{item[1]}}</b>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <form action="/cart" method="get" enctype="multipart/form-data">#}
+{#                                    <input type="hidden" name="restaurant_name" value='{{restaurant_name}}'>#}
+{#                                    <input type="hidden" name="dish_name" value='{{item[0]}}'>#}
+{#                                    <input type="hidden" name="dish_price" value='{{item[1]}}'>#}
+{#                                    <input type="text" name="quantity" value="1">#}
+{#                                    <!--<div class="inc button">+</div><div class="dec button">-</div>-->#}
+{#                                    <!--<input type="hidden" name="item_id" value="BIA-2605">-->#}
+{#                                    <!--<input type="hidden" name="cid" value="000">-->#}
+{#                                    <input type="submit" value="Add to Cart">#}
+{#                                </form>#}
+{#                            <!--<div class="simpleCart_shelfItem">-->#}
+{#	                            <!--<h2 class="item_name"> {{item[0]}} </h2>-->#}
+{#	                            <!--<input type="text" value="1" class="item_Quantity">-->#}
+{#	                            <!--<span class="item_price">{{item[1]}}</span>-->#}
+{#		                        <!--<a class="item_add" href="javascript:;"> Add to Cart </a>-->#}
+{#                            <!--</div>-->#}
+{##}
+{#                            </div>#}
+{#                        </div>#}
+{#                    {% endfor %}#}
+{#                {% else %}#}
+{#                    <div style="text-align: center" class="list-group-item-heading">#}
+{#                        <p>No Restaurant are available</p>#}
+{#                    </div>#}
+{#                {% endif %}#}
+{#            </div>#}
             <!--<div class="simpleCart_items" >-->
 	        <!--</div>-->
 
