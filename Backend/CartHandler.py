@@ -114,18 +114,41 @@ class ViewSingleCartHandler(webapp2.RequestHandler):
                     p = urllib.urlencode({'id':order_key.id(),'restaurant_name':restaurant_name})
                     cancel_url = "/cancel?%s" % p
                     cart_info.append((dish_name, dish_price, quantity, order_key.id(), cancel_url))
+        part = urllib.urlencode({'restaurant_name': restaurant_name})
+        confirm_url = '/confirm?%s' % part
         template = JINJA_ENVIRONMENT.get_template('templates/viewsinglecart.html')
         template_values = {
             'restaurant_name': restaurant_name,
             'cart_query_len': len(cart_query),
             'paypal': restaurant_name,
             'paypal_button': str,
-            'cart_info': cart_info
+            'cart_info': cart_info,
+            'confirm_url': confirm_url
         }
         self.response.write(template.render(template_values))
+
+class ConfirmHandler(webapp2.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        restaurant_name = self.request.get('restaurant_name')
+        # self.response.write(restaurant_name)
+        restaurant = RestaurantModel.query(RestaurantModel.name == restaurant_name).fetch()[0]
+        str = restaurant.payment
+        cart = CartModel.query(CartModel.user==user, CartModel.restaurant_name==restaurant_name).fetch()[0]
+        cart_id = cart.key.id()
+        template = JINJA_ENVIRONMENT.get_template('templates/confirm.html')
+        template_values = {
+            'restaurant_name': restaurant_name,
+            'total_cost': cart.total,
+            'payment': str,
+            'cart_id': cart_id
+        }
+        self.response.write(template.render(template_values))
+
 
 app = webapp2.WSGIApplication([
     ('/cart', CartHandler),
     ('/viewcart', ViewCartHandler),
-    ('/viewsinglecart', ViewSingleCartHandler)
+    ('/viewsinglecart', ViewSingleCartHandler),
+    ('/confirm', ConfirmHandler)
 ], debug=True)

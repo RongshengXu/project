@@ -1,4 +1,4 @@
-application: apt-project-1152
+application: ross-1084
 version: 1
 runtime: python27
 api_version: 1
@@ -53,6 +53,10 @@ handlers:
   login: required
 
 # page handler
+- url: /confirm
+  script: CartHandler.app
+  login: required
+
 - url: /viewsinglecart
   script: CartHandler.app
   login: required

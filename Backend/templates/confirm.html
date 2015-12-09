@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>HUNGRY|order</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/common-style.css" />
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    </head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <p class="navbar-brand">Hungry</p>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="main">Main</a></li>
+                    <li><a href="/location">Location</a></li>
+                    <li><a href="/myorders">My Orders</a></li>
+                    <li><a href="/servicecenter">Service Center</a></li>
+                    <li><a href="/main_restaurant">Log as owner of restaurant</a></li>
+                    <li><a href="/viewcart">My Carts</a></li>
+                    <li><a href={{url}}>{{url_linktext}}</a><li></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        <div>Last step, ready for delicious food!</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Restaurant Name</th>
+                    <th>Total Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{restaurant_name}}</td>
+                    <td>{{total_cost}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div>{{payment|safe}}</div>
+    </div>
+</body>
+</html>
