@@ -34,16 +34,17 @@
     <div class="container">
         <div class="jumbotron col-md-12">
             <div class="col-md-2">
-                <img class="restaurant_logo img-rounded" src="http://stunningdesignz.com/wp-content/uploads/2015/04/foodlover.png"/>
+{#                <img class="restaurant_logo img-rounded" src="http://stunningdesignz.com/wp-content/uploads/2015/04/foodlover.png"/>#}
+                <img class="restaurant_logo img-rounded" src="{{ restaurant_img }}"/>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" style="position: relative; left: -35px;">
                 <h1>{{restaurant_name}}</h1>
                 <div class="row">
                     <div class="col-md-3">
-                        <span class="stars">4</span>
+                        <span class="stars">{{ restaurant_score }}</span>
                     </div>
                     <div class="col-md-1">
-                        <p>4.0</p>
+                        <p>{{ restaurant_score }}</p>
                     </div>
                 </div>
                 <div class="row gap_small">

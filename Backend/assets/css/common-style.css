@@ -68,6 +68,7 @@ img.single_pic {
     display: inline;
     border-radius: 50%;
     height: 100px;
+    width: 100px;
 }
 
 .jumbotron{
