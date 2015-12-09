@@ -17,18 +17,25 @@
             </div>
             <div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="main_restaurant">My Restaurants</a></li>
-                    <!--<li><a href="location">Location</a></li>-->
-                    <!--<li><a href="myorders">My Orders</a></li>-->
-                    <!--<li><a href="servicecenter">Service Center</a></li>-->
+                    <li class="active"><a href="main_restaurant">Restaurants</a></li>
+                    <li><a>Orders</a></li>
+                    <li><a href="/main">Customer Mode</a></li>
                     <li><a href={{url}}>{{url_linktext}}</a><li></li>
                 </ul>
             </div>
         </nav>
     </div>
-    <div class="containre">
+
+    <div class="container">
         <div class="panel panel-default">
-            <div class="panel-heading">All Dishes</div>
+            <div class="panel-heading">
+                All Dishes in {{ restaurant_name }}
+                <div class="col-md-2 pull-right">
+                    <a href={{add_url}}>
+                        <button type="submit" class="btn btn-primary open_btn"><p>Add more dish</p></button>
+                    </a>
+                </div>
+            </div>
             <div class="panel-body">
                 {% if dish_query_len > 0%}
                     {% for item in dish_info %}
@@ -42,10 +49,8 @@
                                         <div style="text-align: center" class="list-group-item-heading">
                                             <b>{{item[0]}}</b>
                                         </div>
-                                    </div>
-                                    <div class="panel-footer">
                                         <div style="text-align: center" class="list-group-item-heading">
-                                            <b>Price: {{item[1]}}</b>
+                                            <b>$ {{item[1]}}</b>
                                         </div>
                                     </div>
                                 </div>
@@ -57,14 +62,8 @@
                         <p>No Dishes are available</p>
                     </div>
                 {% endif %}
-
             </div>
         </div>
-        <a href={{add_url}}>
-            <!--{{add_url}}-->
-            <!--<input type="hidden" class= "form-control" name="restaurant_name" id="name" value={{restaurant_name}} />-->
-            <input type="submit" value="Add more dish">
-        </a>
     </div>
 </body>
 </html>
