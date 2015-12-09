@@ -38,7 +38,7 @@ class ViewDishHandler(webapp2.RequestHandler):
         if (len(dish_query)>0):
             for dish in dish_query:
                 tmp = "/view_picture/%s" % dish.picture_key
-                dish_info.append((dish.name, dish.price, tmp))
+                dish_info.append((dish.name, dish.price, tmp, dish.description))
         part =  urllib.urlencode({'name': restaurant_name})
         add_url = '/add_dish?%s' % part
         # self.response.write(restaurant_name)

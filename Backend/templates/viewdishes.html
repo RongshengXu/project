@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/assets/css/common-style.css" />
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/popbox.js"></script>
 </head>
 <body>
     <div class="container">
@@ -40,7 +41,8 @@
                 {% if dish_query_len > 0%}
                     {% for item in dish_info %}
                         <!--<a href={{item[2]}}>-->
-                            <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="col-md-3 col-sm-6 col-xs-12" data-container="body" data-toggle="popover" data-placement="top"
+      data-content="{{ item[3] }}">
                                 <div class="panel panel-default">
                                     <div class="panel-body">
                                         <img src={{item[2]}} class="img-responsive img-rounded displayed"/>

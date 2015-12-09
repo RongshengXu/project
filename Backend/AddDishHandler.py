@@ -46,6 +46,7 @@ class DishRegister(blobstore_handlers.BlobstoreUploadHandler):
             dish = DishModel(parent=restaurant.key)
             dish.name = self.request.get('dish_name')
             dish.price = float(self.request.get('dish_price'))
+            dish.description = self.request.get('dish_description')
             dish.picture_key = upload.key()
             dish.put()
             self.redirect('/viewdishes?name=%s' %restaurant_name)
