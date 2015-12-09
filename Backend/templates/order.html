@@ -90,10 +90,22 @@
         {% if dish_query_len > 0%}
             {% for item in dish_info %}
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="col-md-3 menu_block">
+                    <div class="menu-food">
+                        <img src="{{item[2]}}">
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="container">
+        {% if dish_query_len > 0%}
+            {% for item in dish_info %}
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-3">
                         <img src="{{item[2]}}" class="img-responsive img-rounded food_pic">
                     </div>
-                    <div class="col-md-5  menu_block">
+                    <div class="col-md-5">
                         <div class="row">
                             <b>{{item[0]}}</b>
                         </div>
@@ -102,7 +114,7 @@
                             <p>{{item[1]}} $</p>
                         </div>
                     </div>
-                    <div class="col-md-3  menu_block pull-right">
+                    <div class="col-md-3 pull-right">
                         <div class="row">
                             <form action="/cart" method="get" enctype="multipart/form-data">
                                 <input type="hidden" name="restaurant_name" value='{{restaurant_name}}'>

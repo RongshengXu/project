@@ -225,6 +225,25 @@ img.food_pic {
     height: 100px;
 }
 
-.menu_block{
-    background-color: #f7f7f7;
+.menu-grid .menu-food{
+    position: relative;
+    float: left;
+    margin-right: 2%;
+    padding-right: 10px;
+    width: 48%;
+}
+
+.menu-food{
+    margin-bottom: 12px;
+    font-size: 12px;
+    background-color: #fafafa;
+    border: 1px solid #eee;
+    height: 102px;
+}
+
+.menu-food img{
+    float: left;
+    margin-right: 14px;
+    width: 100px;
+    height: 100px;
 }
