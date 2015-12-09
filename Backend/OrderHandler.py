@@ -20,7 +20,9 @@ class PlaceOrderHandler(webapp2.RequestHandler):
         restaurant_name = self.request.get('name')
         restaurant = RestaurantModel.query(RestaurantModel.name==restaurant_name).fetch()[0]
         restaurant_img = "/view_picture/%s" % restaurant.Blob_key
-        restaurant_score = restaurant.TotalScore;
+        restaurant_score = restaurant.TotalScore
+        restaurant_shippingfee = restaurant.shipping_fee
+        restaurant_freeshipping = restaurant.free_shipping
 
         dish_query = DishModel.query(ancestor=restaurant.key).fetch()
         dish_info = []
@@ -40,6 +42,8 @@ class PlaceOrderHandler(webapp2.RequestHandler):
             'restaurant_name': restaurant_name,
             'restaurant_img': restaurant_img,
             'restaurant_score': restaurant_score,
+            'restaurant_shippingfee': restaurant_shippingfee,
+            'restaurant_freeshipping': restaurant_freeshipping,
             'dish_info': dish_info
         }
         self.response.write(template.render(template_values))
