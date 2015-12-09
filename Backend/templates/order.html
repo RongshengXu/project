@@ -30,6 +30,11 @@
         </nav>
     </div>
 
+    <div class="sidetools">
+        <a class="sidetools-item" title="Log as owner of a restaurant"><span class="glyphicon glyphicon-th"></span></a>
+        <a class="sidetools-item" title="My Cart"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+    </div>
+
     <div class="container">
         <div class="jumbotron col-md-12">
             <div class="col-md-2">
@@ -110,92 +115,6 @@
                 </div>
             {% endfor %}
         {% endif %}
-    </div>
-
-{#    <div class="container">#}
-{#        <div class="panel panel-default">#}
-{#            <div class="panel-heading">#}
-{#                <div class="row">#}
-{#                    <div class="col-md-2">#}
-{#                        <p>All Dishes</p>#}
-{#                    </div>#}
-{#                    <div class="col-md-1 pull-right">#}
-{#                        <form action="/checkout" method="get">#}
-{#                            <input type="submit" class="btn-primary" value="checkout">#}
-{#                        </form>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <!--<p>-->#}
-{#            <!--Cart: <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)-->#}
-{#            <!--<br />-->#}
-{#            <!--<a href="javascript:;" class="simpleCart_empty">empty cart</a>-->#}
-{#            <!--<br />-->#}
-{#            <!--</p>-->#}
-{##}
-{##}
-{#            <div class="panel-body">#}
-{#                {% if dish_query_len > 0%}#}
-{#                    {% for item in dish_info %}#}
-{#                        <div class="col-md-3 col-sm-6 col-xs-12">#}
-{#                            <div class="panel panel-default">#}
-{#                                <div class="panel-body">#}
-{#                                    <img src={{item[2]}} class="img-responsive img-rounded displayed"/>#}
-{#                                </div>#}
-{#                                <div class="panel-footer">#}
-{#                                    <div style="text-align: center" class="list-group-item-heading">#}
-{#                                        <b>Name: {{item[0]}}</b>#}
-{#                                    </div>#}
-{#                                    <div style="text-align: center" class="list-group-item-heading">#}
-{#                                        <b>Price: {{item[1]}}</b>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <form action="/cart" method="get" enctype="multipart/form-data">#}
-{#                                    <input type="hidden" name="restaurant_name" value='{{restaurant_name}}'>#}
-{#                                    <input type="hidden" name="dish_name" value='{{item[0]}}'>#}
-{#                                    <input type="hidden" name="dish_price" value='{{item[1]}}'>#}
-{#                                    <input type="text" name="quantity" value="1">#}
-{#                                    <!--<div class="inc button">+</div><div class="dec button">-</div>-->#}
-{#                                    <!--<input type="hidden" name="item_id" value="BIA-2605">-->#}
-{#                                    <!--<input type="hidden" name="cid" value="000">-->#}
-{#                                    <input type="submit" value="Add to Cart">#}
-{#                                </form>#}
-{#                            <!--<div class="simpleCart_shelfItem">-->#}
-{#	                            <!--<h2 class="item_name"> {{item[0]}} </h2>-->#}
-{#	                            <!--<input type="text" value="1" class="item_Quantity">-->#}
-{#	                            <!--<span class="item_price">{{item[1]}}</span>-->#}
-{#		                        <!--<a class="item_add" href="javascript:;"> Add to Cart </a>-->#}
-{#                            <!--</div>-->#}
-{##}
-{#                            </div>#}
-{#                        </div>#}
-{#                    {% endfor %}#}
-{#                {% else %}#}
-{#                    <div style="text-align: center" class="list-group-item-heading">#}
-{#                        <p>No Restaurant are available</p>#}
-{#                    </div>#}
-{#                {% endif %}#}
-{#            </div>#}
-            <!--<div class="simpleCart_items" >-->
-	        <!--</div>-->
-
-
-            <!--<div class="sc_demo_items" >-->
-            <!--</div>-->
-
-            <!--<br />-->
-            <!--SubTotal: <span id="simpleCart_total" class="simpleCart_total"></span> <br />-->
-            <!--Tax Rate: <span id="simpleCart_taxRate" class="simpleCart_taxRate"></span> <br />-->
-            <!--Tax: <span id="simpleCart_tax" class="simpleCart_tax"></span> <br />-->
-            <!--Shipping: <span id="simpleCart_shipping" class="simpleCart_shipping"></span> <br />-->
-            <!-------------------------------<br />-->
-            <!--Final Total: <span id="simpleCart_grandTotal" class="simpleCart_grandTotal"></span> <br />-->
-
-            <!--<a href="javascript:;" class="simpleCart_checkout">checkout</a>-->
-
-            <!--<div id="test_id"></div>-->
-
-        </div>
     </div>
 
 </body>
