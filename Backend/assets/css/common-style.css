@@ -1,6 +1,10 @@
 .gap_small{
     margin-top: 15px;
 }
+
+.gap_addchart{
+    margin-top: 35px;
+}
 .gap_middle{
     margin-top: 50px;
 }
@@ -64,10 +68,12 @@ img.single_pic {
     display: inline;
     border-radius: 50%;
     height: 100px;
+    width: 100px;
 }
 
 .jumbotron{
-    background-image:url('http://static11.elemecdn.com/eleme/desktop/media/img/shop-bg.0391dd.jpg');
+    /*background-image:url('http://static11.elemecdn.com/eleme/desktop/media/img/shop-bg.0391dd.jpg');*/
+    background-image:url("/assets/images/shop-bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -211,4 +217,62 @@ span.stars, span.stars span {
 
 span.stars span {
     background-position: 0 0;
+}
+
+img.food_pic {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+    height: 100px;
+}
+
+.menu-grid .menu-food{
+    position: relative;
+    float: left;
+    margin-right: 2%;
+    padding-right: 10px;
+    width: 48%;
+}
+
+.menu-food{
+    margin-bottom: 12px;
+    font-size: 12px;
+    background-color: #fafafa;
+    border: 1px solid #eee;
+    height: 102px;
+}
+
+.menu-food img{
+    float: left;
+    margin-right: 14px;
+    width: 100px;
+    height: 100px;
+}
+
+.menu-food h3{
+    font-family: Helvetica, Arial, serif;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.menu-food .price{
+    position: absolute;
+    left: 130px;
+    bottom: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #e74342;
+}
+
+.menu-food .add_btn{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    width: 80px;
+    height: 30px;
+}
+
+.add_btn p{
+    font-size: 11px;
 }

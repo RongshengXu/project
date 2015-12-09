@@ -26,6 +26,9 @@ class EvaluatePage(webapp2.RequestHandler):
         user = users.get_current_user()
         global restaurant_name
         restaurant_name = self.request.get('name')
+        restaurant = RestaurantModel.query(RestaurantModel.name==restaurant_name).fetch()[0]
+        restaurant_img = "/view_picture/%s" % restaurant.Blob_key
+        restaurant_score = restaurant.TotalScore;
 
         if (user):
             url = users.create_logout_url(self.request.url)
@@ -47,6 +50,8 @@ class EvaluatePage(webapp2.RequestHandler):
             template_values = {
                 'order_url': order_url,
                 'restaurant_name': restaurant_name,
+                'restaurant_img': restaurant_img,
+                'restaurant_score': restaurant_score,
                 'user': user,
                 'url': url,
                 'url_linktext': url_linktext,
