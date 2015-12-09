@@ -71,7 +71,8 @@ img.single_pic {
 }
 
 .jumbotron{
-    background-image:url('http://static11.elemecdn.com/eleme/desktop/media/img/shop-bg.0391dd.jpg');
+    /*background-image:url('http://static11.elemecdn.com/eleme/desktop/media/img/shop-bg.0391dd.jpg');*/
+    background-image:url("/assets/images/shop-bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -246,4 +247,31 @@ img.food_pic {
     margin-right: 14px;
     width: 100px;
     height: 100px;
+}
+
+.menu-food h3{
+    font-family: Helvetica, Arial, serif;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.menu-food .price{
+    position: absolute;
+    left: 130px;
+    bottom: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #e74342;
+}
+
+.menu-food .add_btn{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    width: 80px;
+    height: 30px;
+}
+
+.add_btn p{
+    font-size: 11px;
 }

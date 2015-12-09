@@ -92,42 +92,19 @@
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="menu-food">
                         <img src="{{item[2]}}">
-                    </div>
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-
-    <div class="container">
-        {% if dish_query_len > 0%}
-            {% for item in dish_info %}
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="col-md-3">
-                        <img src="{{item[2]}}" class="img-responsive img-rounded food_pic">
-                    </div>
-                    <div class="col-md-5">
-                        <div class="row">
-                            <b>{{item[0]}}</b>
-                        </div>
-                        <div class="gap_middle"></div>
-                        <div class="row">
-                            <p>{{item[1]}} $</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 pull-right">
-                        <div class="row">
-                            <form action="/cart" method="get" enctype="multipart/form-data">
-                                <input type="hidden" name="restaurant_name" value='{{restaurant_name}}'>
-                                <input type="hidden" name="dish_name" value='{{item[0]}}'>
-                                <input type="hidden" name="dish_price" value='{{item[1]}}'>
-                                <input type="text" class="form-control" name="quantity" value="1">
-                                <!--<div class="inc button">+</div><div class="dec button">-</div>-->
-                                <!--<input type="hidden" name="item_id" value="BIA-2605">-->
-                                <!--<input type="hidden" name="cid" value="000">-->
-                                <div class="gap_addchart"></div>
-                                <input class="pull-right" type="submit" value="Add to Cart">
-                            </form>
-                        </div>
+                        <h3>{{item[0]}}</h3>
+                        <p class="price">{{item[1]}} $</p>
+                        <form action="/cart" method="get" enctype="multipart/form-data">
+                            <input type="hidden" name="restaurant_name" value='{{restaurant_name}}'>
+                            <input type="hidden" name="dish_name" value='{{item[0]}}'>
+                            <input type="hidden" name="dish_price" value='{{item[1]}}'>
+                            <input type="text" class="hidden" name="quantity" value="1">
+                            <!--<div class="inc button">+</div><div class="dec button">-</div>-->
+                            <!--<input type="hidden" name="item_id" value="BIA-2605">-->
+                            <!--<input type="hidden" name="cid" value="000">-->
+                            <div class="gap_addchart"></div>
+                            <button class="btn btn-primary add_btn" type="submit"><p>Add to Cart</p></button>
+                        </form>
                     </div>
                 </div>
             {% endfor %}
