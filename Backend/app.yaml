@@ -16,7 +16,7 @@ handlers:
 
 - url: /assets/images
   static_dir: assets/images
-
+############################################
 # process handlers
 - url: /evaluate
   script: RestaurantHandler.app
@@ -52,6 +52,10 @@ handlers:
   script: CheckoutHandler.app
   login: required
 
+- url: /payment
+  script: CartHandler.app
+  login: required
+#####################################################
 # page handler
 - url: /confirm
   script: CartHandler.app

@@ -9,6 +9,27 @@
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
     </head>
+    <script>
+        $(document).ready(function(){
+             //$('#paypal').html("HELLO");
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/payment",
+                data: {
+                        'restaurant_name': $('#name').text()
+                      },
+                async: true,
+                success: function(data){
+                    $("input[name='item_name']").val($('#name').text());
+                    $("input[name='amount']").val($('#cost').text());
+                    //$('#paypal').html(data.payment);
+                    //$('#paypal').html(data);
+                },
+                error:function(exception){alert('Exeption:'+exception);}
+            });
+        });
+    </script>
 <body>
     <div class="container">
         <nav class="navbar navbar-default">
@@ -28,6 +49,8 @@
             </div>
         </nav>
     </div>
+    <div id="name" hidden="hidden">{{restaurant_name}}</div>
+    <div id="cost" hidden="hidden">{{total_cost}}</div>
     <div class="container">
         <div>Last step, ready for delicious food!</div>
         <table class="table">
@@ -46,5 +69,6 @@
         </table>
         <div>{{payment|safe}}</div>
     </div>
+    <div id="paypal"> </div>
 </body>
 </html>

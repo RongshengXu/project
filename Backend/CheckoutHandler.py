@@ -20,15 +20,19 @@ class CheckoutHandler(webapp2.RequestHandler):
 
 class DecrementHandler(webapp2.RequestHandler):
     def post(self):
+        user = users.get_current_user()
         dish_name = self.request.get('dish_name')
-        # url = "/test?name=%s" % dish_name
         restaurant_name = self.request.get('restaurant_name')
         id = int(self.request.get('id'))
         order = OrderModel.get_by_id(id)
         num = order.number
         if (num>0):
+            cart = CartModel.query(CartModel.user==user, CartModel.restaurant_name==restaurant_name).fetch()[0]
             order.number = order.number - 1
             order.put()
+            dish = order.dish.get()
+            cart.total = cart.total - dish.price
+            cart.put()
         info = {"name": dish_name, "other": restaurant_name, "id":id}
         info_json = json.dumps(info)
         self.response.write(info_json)
@@ -40,9 +44,13 @@ class IncrementHandler(webapp2.RequestHandler):
         dish_name = self.request.get('dish_name')
         restaurant_name = self.request.get('restaurant_name')
         id = int(self.request.get('id'))
+        cart = CartModel.query(CartModel.user==user, CartModel.restaurant_name==restaurant_name).fetch()[0]
         order = OrderModel.get_by_id(id)
         order.number = order.number + 1
         order.put()
+        dish = order.dish.get()
+        cart.total = cart.total + dish.price
+        cart.put()
         # url = "/test?name=%s" % dish_name
         info = {"name": dish_name, "other": restaurant_name, "id":id}
         info_json = json.dumps(info)

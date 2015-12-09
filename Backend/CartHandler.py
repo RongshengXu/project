@@ -6,6 +6,7 @@ import webapp2
 import os
 import jinja2
 import urllib
+import json
 from handlers.DataModel import RestaurantModel, DishModel, OrderModel, CartModel
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -145,10 +146,20 @@ class ConfirmHandler(webapp2.RequestHandler):
         }
         self.response.write(template.render(template_values))
 
+class PaymentHandler(webapp2.RequestHandler):
+    def post(self):
+        restaurant_name = self.request.get('restaurant_name')
+        restaurant = RestaurantModel.query(RestaurantModel.name==restaurant_name).fetch()[0]
+        payment = restaurant.payment
+        info = {'payment': payment}
+        info_json = json.dumps(info)
+        self.response.write(info_json)
+        # self.response.write("Test!!!!")
 
 app = webapp2.WSGIApplication([
     ('/cart', CartHandler),
     ('/viewcart', ViewCartHandler),
     ('/viewsinglecart', ViewSingleCartHandler),
-    ('/confirm', ConfirmHandler)
+    ('/confirm', ConfirmHandler),
+    ('/payment', PaymentHandler)
 ], debug=True)
