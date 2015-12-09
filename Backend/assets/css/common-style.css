@@ -299,3 +299,16 @@ img.food_pic {
     color: #888;
     display: block;
 }
+
+.open_btn{
+    position:relative;
+    left: 50px;
+    width: 130px;
+    height: 25px;
+}
+
+.open_btn p{
+    position:relative;
+    top:-2px;
+    font-size: 12px;
+}
