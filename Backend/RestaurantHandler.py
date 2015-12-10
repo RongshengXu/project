@@ -29,6 +29,7 @@ class EvaluatePage(webapp2.RequestHandler):
         restaurant = RestaurantModel.query(RestaurantModel.name==restaurant_name).fetch()[0]
         restaurant_img = "/view_picture/%s" % restaurant.Blob_key
         restaurant_score = restaurant.TotalScore
+        restaurant_phone = restaurant.phoneNum
         restaurant_shippingfee = restaurant.shipping_fee
         restaurant_freeshipping = restaurant.free_shipping
 
@@ -54,6 +55,7 @@ class EvaluatePage(webapp2.RequestHandler):
                 'restaurant_name': restaurant_name,
                 'restaurant_img': restaurant_img,
                 'restaurant_score': restaurant_score,
+                'restaurant_phone': restaurant_phone,
                 'restaurant_shippingfee': restaurant_shippingfee,
                 'restaurant_freeshipping': restaurant_freeshipping,
                 'user': user,
