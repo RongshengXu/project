@@ -144,6 +144,7 @@ class ConfirmHandler(webapp2.RequestHandler):
         restaurant = RestaurantModel.query(RestaurantModel.name == restaurant_name).fetch()[0]
         str = restaurant.payment
         cart = CartModel.query(CartModel.user==user, CartModel.restaurant_name==restaurant_name).fetch()[0]
+        ######################################################Save the order information (user address|phone|notes)###########################################################
         cart_id = cart.key.id()
         shipping_fee = restaurant.shipping_fee
         template = JINJA_ENVIRONMENT.get_template('templates/confirm.html')
@@ -171,6 +172,7 @@ class PayHandler(webapp2.RequestHandler):
         restaurant_name = self.request.get('restaurant_name')
         user = users.get_current_user()
         cart = CartModel.query(CartModel.user==user, CartModel.restaurant_name==restaurant_name).fetch()[0]
+        ######################################################Send Email to restaurant###########################################################
         history_cart = HistoryCartModel()
         history_cart.restaurant_name = restaurant_name
         history_cart.user = user
