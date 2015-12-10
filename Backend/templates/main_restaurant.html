@@ -17,58 +17,27 @@
             </div>
             <div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="main_restaurant">My Restaurants</a></li>
-                    <!--<li><a href="location">Location</a></li>-->
-                    <!--<li><a href="myorders">My Orders</a></li>-->
-                    <!--<li><a href="servicecenter">Service Center</a></li>-->
-                    <li><a href="/main">Log as customer</a></li>
+                    <li class="active"><a href="/main_restaurant">Restaurants</a></li>
+                    <li><a>Orders</a></li>
+                    <li><a href="/main">Customer Mode</a></li>
                     <li><a href={{url}}>{{url_linktext}}</a><li></li>
                 </ul>
             </div>
         </nav>
     </div>
 
-    <div class="container">
-        <!--<div class="col-md-6">-->
-            <!--<span>Location:</span>-->
-            <!--<span class="text-info">{{current_location}}</span>-->
-        <!--</div>-->
-
-        <div class="col-md-6 text-right">
-            <div class="btn-group">
-                <div class="btn-group btn-group-sm">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        Category
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a>All</a></li>
-                        <li><a>Fast Food</a></li>
-                        <li><a>Mexican Food</a></li>
-                        <li><a>Asian Food</a></li>
-                    </ul>
-                </div>
-
-                <div class="btn-group btn-group-sm">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        Sorted by
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a>Distance</a></li>
-                        <li><a>Valuation</a></li>
-                        <li><a>Sales</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="gap_small"></div>
 
     <div class="container">
         <div class="panel panel-default">
-            <div class="panel-heading">All Restaurants</div>
+            <div class="panel-heading">
+                My Restaurants
+                <div class="col-md-2 pull-right">
+                    <a href="/restaurantregister">
+                        <button type="submit" class="btn btn-primary open_btn"><p>Open a restaurant</p></button>
+                    </a>
+            </div>
+            </div>
             <div class="panel-body">
                 {% if restaurant_query_len > 0%}
                     {% for item in restaurant_info %}
@@ -95,9 +64,6 @@
 
             </div>
         </div>
-        <a href="/restaurantregister">
-            <input type="submit" value="Open another restaurant">
-        </a>
     </div>
 
 </body>

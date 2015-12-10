@@ -45,6 +45,7 @@ class DishModel(ndb.Model):
     """
     name = ndb.StringProperty()
     price = ndb.FloatProperty()
+    description = ndb.StringProperty()
     picture_key = ndb.BlobKeyProperty()
     # restaurant_key = ndb.KeyProperty(kind=RestaurantModel)
 

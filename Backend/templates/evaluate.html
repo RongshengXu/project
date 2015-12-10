@@ -24,11 +24,16 @@
                     <li><a href="/location">Location</a></li>
                     <li><a href="/myorders">My Orders</a></li>
                     <li><a href="/servicecenter">Service Center</a></li>
-                    <li><a href="/main_restaurant">Log as owner of restaurant</a></li>
+{#                    <li><a href="/main_restaurant">Log as owner of restaurant</a></li>#}
                     <li><a href={{url}}>{{url_linktext}}</a><li></li>
                 </ul>
             </div>
         </nav>
+    </div>
+
+    <div class="sidetools">
+        <a href="/main_restaurant" class="sidetools-item" title="Log as owner of a restaurant"><span class="glyphicon glyphicon-th"></span></a>
+        <a href="/viewcart" class="sidetools-item" title="My Cart"><span class="glyphicon glyphicon-shopping-cart"></span></a>
     </div>
 
     <div class="container">
@@ -63,8 +68,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-center">$5</td>
-                            <td class="text-center">$30</td>
+                            <td class="text-center">${{ restaurant_shippingfee }}</td>
+                            <td class="text-center">${{ restaurant_freeshipping }}</td>
                         </tr>
                     </tbody>
                 </table>

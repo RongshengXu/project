@@ -21,39 +21,47 @@
                     <li><a href="/location">Location</a></li>
                     <li><a href="/myorders">My Orders</a></li>
                     <li><a href="/servicecenter">Service Center</a></li>
-                    <li><a href="/main_restaurant">Log as owner of restaurant</a></li>
-                    <li><a href="/viewcart">My Cart</a></li>
                     <li><a href={{url}}>{{url_linktext}}</a><li></li>
                 </ul>
             </div>
         </nav>
     </div>
+
+    <div class="sidetools">
+        <a href="/main_restaurant" class="sidetools-item" title="Log as owner of a restaurant"><span class="glyphicon glyphicon-th"></span></a>
+        <a href="/viewcart" class="sidetools-item" title="My Cart"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+    </div>
+
     <div class="container">
-        {% if cart_query_len > 0%}
-            <table class="table">
-            <thead>
-                <tr>
-                    <th>Restaurant Name</th>
-                    <!--<th>Dish Name</th>-->
-                    <!--<th>Price</th>-->
-                    <!--<th>Quantity</th>-->
-                    <th>Total cost</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in cart_info %}
-                    <tr>
-                        <td><a href="{{item[2]}}"> {{item[0]}}</a></td>
-                        <td>{{item[1]}}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-            </table>
-        {% else %}
-            <div style="text-align: center" class="list-group-item-heading">
-                <p>No Cart is available</p>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                All Pending Orders
             </div>
-        {% endif %}
+            <div class="panel-body">
+                {% if cart_query_len > 0%}
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Restaurant Name</th>
+                                <th>Total cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart_info %}
+                                <tr>
+                                    <td><a class="rm_underline" href="{{item[2]}}"> {{item[0]}}</a></td>
+                                    <td>{{item[1]}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div style="text-align: center" class="list-group-item-heading">
+                        <p>No Cart is available</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </body>
 </html>
