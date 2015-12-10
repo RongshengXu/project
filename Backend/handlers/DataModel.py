@@ -8,6 +8,7 @@ class RestaurantModel(ndb.Model):
     name = ndb.StringProperty()
     owner = ndb.UserProperty()
     ownerName = ndb.StringProperty()
+    phoneNum = ndb.StringProperty()
     location = ndb.StringProperty()
     latitude = ndb.FloatProperty()
     longitude = ndb.FloatProperty()
