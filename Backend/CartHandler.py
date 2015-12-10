@@ -105,6 +105,7 @@ class ViewSingleCartHandler(webapp2.RequestHandler):
         # self.response.write(str)
         if (len(cart_query)>0):
             cart = cart_query[0]
+            cart_total = cart.total
             if (len(cart.orders)>0):
                 for order_key in cart.orders:
                     order = order_key.get()
@@ -124,6 +125,7 @@ class ViewSingleCartHandler(webapp2.RequestHandler):
             'paypal': restaurant_name,
             'paypal_button': str,
             'cart_info': cart_info,
+            'cart_total': cart_total,
             'confirm_url': confirm_url
         }
         self.response.write(template.render(template_values))

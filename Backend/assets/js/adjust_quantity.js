@@ -23,6 +23,7 @@
                         async: true,
                         success: function(data){
                             $('#test').html(data.name + ' ' + data.other + ' ' + data.id);
+                            $('#total_price').text(data.total);
                         },
                         error:function(exception){alert('Exeption:'+exception);}
                     });
@@ -43,6 +44,7 @@
                             async: true,
                             success: function(data){
                                 $('#test').html(data.name + ' ' + data.other + ' ' + data.id);
+                                $('#total_price').text(data.total);
                             },
                             error:function(exception){alert('Exeption:'+exception);}
                         });

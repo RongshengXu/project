@@ -33,7 +33,7 @@ class DecrementHandler(webapp2.RequestHandler):
             dish = order.dish.get()
             cart.total = cart.total - dish.price
             cart.put()
-        info = {"name": dish_name, "other": restaurant_name, "id":id}
+        info = {"name": dish_name, "other": restaurant_name, "id":id, 'total': cart.total}
         info_json = json.dumps(info)
         self.response.write(info_json)
         # self.redirect(url)
@@ -52,7 +52,7 @@ class IncrementHandler(webapp2.RequestHandler):
         cart.total = cart.total + dish.price
         cart.put()
         # url = "/test?name=%s" % dish_name
-        info = {"name": dish_name, "other": restaurant_name, "id":id}
+        info = {"name": dish_name, "other": restaurant_name, "id":id, 'total': cart.total}
         info_json = json.dumps(info)
         self.response.write(info_json)
 

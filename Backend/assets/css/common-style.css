@@ -316,3 +316,10 @@ img.food_pic {
     top:-2px;
     font-size: 12px;
 }
+
+.total_price{
+    position:relative;
+    left: -15px;
+    font-family: Arial;
+    font-size: 20px;
+}
