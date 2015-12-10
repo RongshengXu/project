@@ -1,7 +1,6 @@
 __author__ = 'rongshengxu'
 
 from google.appengine.ext import ndb
-from google.appengine.ext import db
 
 class RestaurantModel(ndb.Model):
     """ restaurant model
@@ -32,6 +31,15 @@ class CartModel(ndb.Model):
     orders = ndb.KeyProperty(kind='OrderModel', repeated=True)
     total = ndb.FloatProperty()
 
+class HistoryCartModel(ndb.Model):
+    """      store user cart history
+    """
+    user = ndb.UserProperty()
+    restaurant_name = ndb.StringProperty()
+    orders = ndb.KeyProperty(kind='OrderModel', repeated=True)
+    total = ndb.FloatProperty()
+    createTime = ndb.DateTimeProperty(auto_now_add=True)
+
 class DishModel(ndb.Model):
     """ dish model
     """
@@ -48,7 +56,7 @@ class UserModel(ndb.Model):
     last_location = ndb.StringProperty()
     last_latitude = ndb.FloatProperty()
     last_longitude = ndb.FloatProperty()
-    orders = ndb.KeyProperty(kind='CartModel', repeated=True)
+    orders = ndb.KeyProperty(kind='HistoryCartModel', repeated=True)
 
 class OrderModel(ndb.Model):
     """     order model

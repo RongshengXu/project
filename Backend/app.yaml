@@ -55,8 +55,16 @@ handlers:
 - url: /payment
   script: CartHandler.app
   login: required
+
+- url: /paypal
+  script: CartHandler.app
+  login: required
 #####################################################
 # page handler
+- url: /myorders
+  script: MyOrdersHandler.app
+  login: required
+
 - url: /confirm
   script: CartHandler.app
   login: required

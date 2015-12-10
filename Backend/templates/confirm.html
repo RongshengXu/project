@@ -23,10 +23,25 @@
                 success: function(data){
                     $("input[name='item_name']").val($('#name').text());
                     $("input[name='amount']").val($('#cost').text());
+                    $("input[name='shipping']").val($('#shipping_fee').text());
                     //$('#paypal').html(data.payment);
                     //$('#paypal').html(data);
                 },
                 error:function(exception){alert('Exeption:'+exception);}
+            });
+            $("input[name='submit']").click(function(){
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/paypal",
+                    data: {
+                            'restaurant_name': $('#name').text()
+                          },
+                    async: true,
+                    success: function(data){
+                    },
+                    error:function(exception){alert('Exeption:'+exception);}
+                });
             });
         });
     </script>
@@ -51,6 +66,7 @@
     </div>
     <div id="name" hidden="hidden">{{restaurant_name}}</div>
     <div id="cost" hidden="hidden">{{total_cost}}</div>
+    <div id="shipping_fee" hidden="hidden">{{shipping_fee}}</div>
     <div class="container">
         <div>Last step, ready for delicious food!</div>
         <table class="table">

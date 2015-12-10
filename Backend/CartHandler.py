@@ -7,7 +7,7 @@ import os
 import jinja2
 import urllib
 import json
-from handlers.DataModel import RestaurantModel, DishModel, OrderModel, CartModel
+from handlers.DataModel import RestaurantModel, DishModel, OrderModel, CartModel, HistoryCartModel
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -137,10 +137,12 @@ class ConfirmHandler(webapp2.RequestHandler):
         str = restaurant.payment
         cart = CartModel.query(CartModel.user==user, CartModel.restaurant_name==restaurant_name).fetch()[0]
         cart_id = cart.key.id()
+        shipping_fee = restaurant.shipping_fee
         template = JINJA_ENVIRONMENT.get_template('templates/confirm.html')
         template_values = {
             'restaurant_name': restaurant_name,
             'total_cost': cart.total,
+            'shipping_fee': shipping_fee,
             'payment': str,
             'cart_id': cart_id
         }
@@ -156,10 +158,25 @@ class PaymentHandler(webapp2.RequestHandler):
         self.response.write(info_json)
         # self.response.write("Test!!!!")
 
+class PayHandler(webapp2.RequestHandler):
+    def post(self):
+        restaurant_name = self.request.get('restaurant_name')
+        user = users.get_current_user()
+        cart = CartModel.query(CartModel.user==user, CartModel.restaurant_name==restaurant_name).fetch()[0]
+        history_cart = HistoryCartModel()
+        history_cart.restaurant_name = restaurant_name
+        history_cart.user = user
+        history_cart.total = cart.total
+        history_cart.orders = cart.orders
+        history_cart.put()
+        cart.key.delete()
+        self.response.write(json.dumps({'data': 'success'}))
+
 app = webapp2.WSGIApplication([
     ('/cart', CartHandler),
     ('/viewcart', ViewCartHandler),
     ('/viewsinglecart', ViewSingleCartHandler),
     ('/confirm', ConfirmHandler),
-    ('/payment', PaymentHandler)
+    ('/payment', PaymentHandler),
+    ('/paypal', PayHandler)
 ], debug=True)
