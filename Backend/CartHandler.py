@@ -75,8 +75,14 @@ class ViewCartHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         carts_query = CartModel.query(CartModel.user==user).fetch()
         carts_info = []
+        length = len(carts_query)
         if (len(carts_query)>0):
             for cart in carts_query:
+                if (cart.total <= 0):
+                    length = length - 1
+                    cart.key.delete()
+                    continue
+
                 restaurant_name = cart.restaurant_name
                 total = cart.total
                 part = urllib.urlencode({'name': restaurant_name})
@@ -89,7 +95,7 @@ class ViewCartHandler(webapp2.RequestHandler):
                 carts_info.append((restaurant_name, total, cart_url))
         template = JINJA_ENVIRONMENT.get_template('templates/viewcart.html')
         template_values = {
-            'cart_query_len': len(carts_query),
+            'cart_query_len': length,
             'cart_info': carts_info
         }
         self.response.write(template.render(template_values))
