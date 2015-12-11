@@ -65,6 +65,17 @@
                                     {% endfor %}
                                     <tbody>
                                 </table>
+                                <div class="col-md-3 pull-right">
+                                    <form action='/rate' method="post"  enctype="multipart/form-data">
+                                        <input type="hidden" class="form-control" name="restaurant_name" value='{{item[1]}}'/>
+                                        <div class="col-md-4">
+                                            <input type="number" min="0" max="5" class="form-control" name="rate_score" required/>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="submit" class="btn btn-info rate_btn" value="Rate the Restaurant">
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     {% endfor %}
