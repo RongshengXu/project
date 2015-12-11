@@ -23,13 +23,17 @@
                     <li><a href="/location">Location</a></li>
                     <li><a href="/myorders">My Orders</a></li>
                     <li><a href="/servicecenter">Service Center</a></li>
-                    <li><a href="/main_restaurant">Log as owner of restaurant</a></li>
-                    <li><a href="/viewcart">My Cart</a></li>
                     <li><a href={{url}}>{{url_linktext}}</a><li></li>
                 </ul>
             </div>
         </nav>
     </div>
+
+    <div class="sidetools">
+        <a href="/main_restaurant" class="sidetools-item" title="Log as owner of a restaurant"><span class="glyphicon glyphicon-th"></span></a>
+        <a href="/viewcart" class="sidetools-item" title="My Cart"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+    </div>
+
     <div class="gap_small"></div>
 
     <div class="container">
@@ -38,36 +42,31 @@
             <div class="panel-body">
                 {% if history_cart_query_len > 0%}
                     {% for item in history_cart_info %}
-                        <table>
-                            <tr>
-                                <td>Time: {{item[0]}}</td>
-                            </tr>
-                            <tr>
-                                <td>Restaurant: {{item[1]}}</td>
-                            </tr>
-                            <tr>
-                                <td>Total: {{item[2]}}</td>
-                            </tr>
-                        </table>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Dish Name</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for order in item[3]%}
-                                <tr>
-                                    <td>{{order[0]}}</td>
-                                    <td>{{order[1]}}</td>
-                                    <td>{{order[2]}}</td>
-                                </tr>
-                            {% endfor %}
-                            <tbody>
-                        </table>
-
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                {{item[0]}} at <b>{{item[1]}}</b> <span class="pull-right">Total: {{item[2]}}</span>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Dish Name</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for order in item[3]%}
+                                        <tr>
+                                            <td>{{order[0]}}</td>
+                                            <td>{{order[1]}}</td>
+                                            <td>{{order[2]}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tbody>
+                                </table>
+                            </div>
+                        </div>
                     {% endfor %}
                 {% else %}
                     <div style="text-align: center" class="list-group-item-heading">
