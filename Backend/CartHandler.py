@@ -8,6 +8,12 @@ import jinja2
 import urllib
 import json
 from handlers.DataModel import RestaurantModel, DishModel, OrderModel, CartModel, HistoryCartModel
+from google.appengine.api import mail
+
+SERVICE_DOMAIN = "ross-1084"
+MAILBOX = ".appspotmail.com"
+APP_NAME = "Hungry"
+EMAIL_SENDER = APP_NAME + "@"+SERVICE_DOMAIN+MAILBOX
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -185,6 +191,18 @@ class PayHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         cart = CartModel.query(CartModel.user==user, CartModel.restaurant_name==restaurant_name).fetch()[0]
         ######################################################Send Email to restaurant###########################################################
+        user_email = user.nickname()
+        my_email = "yangxuanemail@gmail.com"
+        email_subject = "New Order"
+        email_content = '''You have a new order with the following information:
+        Address: %s
+        Phone Number: %s
+        Time: %s
+        Notes: %s'''
+
+        mail.send_mail(sender=EMAIL_SENDER, to=user_email, subject=email_subject, body=email_content % (cart.customer_address, cart.customer_phone, cart.customer_time, cart.customer_notes))
+        mail.send_mail(sender=EMAIL_SENDER, to=my_email, subject=email_subject, body=email_content % (cart.customer_address, cart.customer_phone, cart.customer_time, cart.customer_notes))
+
         history_cart = HistoryCartModel()
         history_cart.restaurant_name = restaurant_name
         history_cart.user = user
