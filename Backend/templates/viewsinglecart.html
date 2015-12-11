@@ -90,6 +90,38 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Customer Information (* means required)
+                </div>
+                <div class="panel-body">
+                    <form action="{{confirm_url}}" method="post"  enctype="multipart/form-data">
+                        <div class="form-group col-md-12">
+                            <b>Address *</b>
+                            <input type="text" class="form-control" name="customer_address" placeholder = "Please input the address for us to deliver the food" required/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <b>Phone Number *</b>
+                            <input type="text" class="form-control" name="customer_phone" placeholder = "Please input the phone number for to contact you" required/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <b>Time to Deilver</b>
+                            <input type="text" class="form-control" name="customer_time" placeholder = "We will deliver as soon as possible if this filed is empty"/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <b>Description</b>
+                            <textarea type="text" class="form-control" name="customer_note"  placeholder = "Please input additional requirement of the food, if you want to"></textarea>
+                        </div>
+
+                        <div class="col-md-12 text-right">
+                            <input type="submit" class="btn btn-success" value="Confirm and Checkout">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 {#    <div class="container">#}
@@ -141,7 +173,6 @@
         <div>
             <a href="{{confirm_url}}">confirm and checkout</a>
         </div>
-    </div>
 </body>
 <script>
     function decrement(a) {
