@@ -32,6 +32,11 @@ class CartModel(ndb.Model):
     orders = ndb.KeyProperty(kind='OrderModel', repeated=True)
     total = ndb.FloatProperty()
 
+    customer_address = ndb.StringProperty()
+    customer_phone = ndb.StringProperty()
+    customer_time = ndb.StringProperty()
+    customer_notes = ndb.StringProperty()
+
 class HistoryCartModel(ndb.Model):
     """      store user cart history
     """
