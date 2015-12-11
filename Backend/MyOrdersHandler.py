@@ -17,7 +17,7 @@ class MyOrdersHandler(webapp2.RequestHandler):
     def get(self):
         # self.response.write("My Orders")
         user = users.get_current_user()
-        history_cart_query = HistoryCartModel.query(HistoryCartModel.user==user).order(HistoryCartModel.createTime).fetch()
+        history_cart_query = HistoryCartModel.query(HistoryCartModel.user==user).order(-HistoryCartModel.createTime).fetch()
         history_cart_info = []
         if (len(history_cart_query)>0):
             for history_cart in history_cart_query:
