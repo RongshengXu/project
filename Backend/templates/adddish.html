@@ -39,18 +39,18 @@
                 <form action={{upload_url}} method="post"  enctype="multipart/form-data">
                     <div class="form-group col-md-4">
                         <input type="hidden" class="form-control"name="restaurant_name" id="restaurant-name" value='{{restaurant_name}}' />
-                        <input type="text" class="form-control" name="dish_name" id="dish-name"/>
+                        <input type="text" class="form-control" name="dish_name" id="dish-name"  required/>
                         <b>Dish Name</b>
                     </div>
                     <div class="form-group col-md-4">
-                        <input type="text" class="form-control" name="dish_price" id="dish-price"/>
+                        <input type="text" class="form-control" name="dish_price" id="dish-price"  required/>
                         <b>Price</b>
                     </div>
                     <div class="form-group col-md-4">
                         <span class="btn btn-success fileinput-button">
                             <i class="glyphicon glyphicon-plus"></i>
                             <span>Add a file...</span>
-                            <input type="file" class="form-control" name="dish_img" id="dish-img"/>
+                            <input type="file" class="form-control" name="dish_img" id="dish-img"  required/>
                         </span>
                         <p><b>Cover Picture</b></p>
                     </div>
