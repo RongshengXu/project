@@ -65,6 +65,10 @@ handlers:
   script: MyOrdersHandler.app
   login: required
 
+- url: /rate
+  script: MyOrdersHandler.app
+  login: required
+
 - url: /confirm
   script: CartHandler.app
   login: required

@@ -6,6 +6,7 @@ import webapp2
 import os
 import jinja2
 from handlers.DataModel import HistoryCartModel
+from handlers.DataModel import RestaurantModel
 import urllib
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -38,6 +39,24 @@ class MyOrdersHandler(webapp2.RequestHandler):
         }
         self.response.write(template.render(template_values))
 
+class RateHandler(webapp2.RequestHandler):
+    def get(self):
+        URL = '/myorders'
+        restaurant_name = self.request.get('restaurant_name')
+        new_score = float(self.request.get('rate_score'))
+        restaurant_list = RestaurantModel.query(RestaurantModel.name==restaurant_name).fetch()
+
+        if (len(restaurant_list) > 0):
+            restaurant = restaurant_list[0]
+            if (restaurant.numberOfScores <= 0):
+                restaurant.TotalScore = 0
+            restaurant.TotalScore = round((restaurant.TotalScore * restaurant.numberOfScores + new_score)/(restaurant.numberOfScores + 1),2)
+            restaurant.numberOfScores = restaurant.numberOfScores + 1
+            restaurant.put()
+
+        self.redirect(URL)
+
 app = webapp2.WSGIApplication([
-    ('/myorders', MyOrdersHandler)
+    ('/myorders', MyOrdersHandler),
+    ('/rate', RateHandler)
 ], debug=True)
