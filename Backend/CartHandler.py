@@ -122,8 +122,9 @@ class ViewSingleCartHandler(webapp2.RequestHandler):
                     p = urllib.urlencode({'id':order_key.id(),'restaurant_name':restaurant_name})
                     cancel_url = "/cancel?%s" % p
                     cart_info.append((dish_name, dish_price, quantity, order_key.id(), cancel_url))
-        part = urllib.urlencode({'restaurant_name': restaurant_name})
-        confirm_url = '/confirm?%s' % part
+        # part = urllib.urlencode({'restaurant_name': restaurant_name})
+        # confirm_url = '/confirm?%s' % part
+        confirm_url = '/confirm'
         template = JINJA_ENVIRONMENT.get_template('templates/viewsinglecart.html')
         template_values = {
             'restaurant_name': restaurant_name,
@@ -144,8 +145,14 @@ class ConfirmHandler(webapp2.RequestHandler):
         restaurant = RestaurantModel.query(RestaurantModel.name == restaurant_name).fetch()[0]
         str = restaurant.payment
         cart = CartModel.query(CartModel.user==user, CartModel.restaurant_name==restaurant_name).fetch()[0]
-        ######################################################Save the customer information (user address|phone|notes)###########################################################
         cart_id = cart.key.id()
+        ######################################################Save the customer information (user address|phone|notes)###########################################################
+        cart.customer_address = self.request.get('customer_address')
+        cart.customer_phone = self.request.get('customer_phone')
+        cart.customer_time = self.request.get('customer_time')
+        cart.customer_notes = self.request.get('customer_notes')
+        cart.put()
+
         shipping_fee = restaurant.shipping_fee
         template = JINJA_ENVIRONMENT.get_template('templates/confirm.html')
         template_values = {
@@ -153,7 +160,12 @@ class ConfirmHandler(webapp2.RequestHandler):
             'total_cost': cart.total,
             'shipping_fee': shipping_fee,
             'payment': str,
-            'cart_id': cart_id
+            'cart_id': cart_id,
+
+            'customer_address': cart.customer_address,
+            'customer_phone': cart.customer_phone,
+            'customer_time': cart.customer_time,
+            'customer_notes': cart.customer_notes,
         }
         self.response.write(template.render(template_values))
 

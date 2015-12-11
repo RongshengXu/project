@@ -97,7 +97,11 @@
                     Customer Information (* means required)
                 </div>
                 <div class="panel-body">
-                    <form action="{{confirm_url}}" method="post"  enctype="multipart/form-data">
+                    <form action="{{confirm_url}}" method="get"  enctype="multipart/form-data">
+                        <div class="form-group col-md-12 hidden">
+                            <b>Restaurant Name</b>
+                            <input type="text" class="form-control" name="restaurant_name" value="{{ restaurant_name }}"/>
+                        </div>
                         <div class="form-group col-md-12">
                             <b>Address *</b>
                             <input type="text" class="form-control" name="customer_address" placeholder = "Please input the address for us to deliver the food" required/>
