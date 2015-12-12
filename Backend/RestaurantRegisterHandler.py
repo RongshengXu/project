@@ -38,6 +38,7 @@ class Register(blobstore_handlers.BlobstoreUploadHandler):
         restaurant.name = self.request.get('name')
         restaurant.owner = users.get_current_user()
         restaurant.ownerName = self.request.get('ownername')
+        restaurant.phoneNum = self.request.get('phonenumber')
         restaurant.location = self.request.get('location')
         if (self.request.get('latitude')!=""):
             restaurant.latitude = float(self.request.get('latitude'))

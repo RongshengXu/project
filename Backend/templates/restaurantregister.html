@@ -38,18 +38,18 @@
             <div class="panel-body">
                 <form action={{upload_url}} method="post"  enctype="multipart/form-data">
                     <div class="form-group col-md-4">
-                        <input type="text" class="form-control" name="name" id="map-name"/>
+                        <input type="text" class="form-control" name="name" id="map-name" required/>
                         <b>Restaurant Name</b>
                     </div>
                     <div class="form-group col-md-4">
-                        <input type="text" class="form-control" name="ownername" id="map-ownername"/>
+                        <input type="text" class="form-control" name="ownername" id="map-ownername"  required/>
                         <b>Owner Name</b>
                     </div>
                     <div class="form-group col-md-4">
                         <span class="btn btn-success fileinput-button">
                             <i class="glyphicon glyphicon-plus"></i>
                             <span>Add a file...</span>
-                            <input type="file" name="img" id="map-img"/>
+                            <input type="file" name="img" id="map-img"  required/>
                         </span>
                         <p><b>Cover Picture</b></p>
                     </div>
@@ -57,16 +57,20 @@
                         <input type="text" class="form-control" name="location" id="map-address"/>
                         <b>Location</b>
                     </div>
-                    <div class="form-group col-md-3">
-                        <input type="text" class="form-control" name="freeshipping" id="map-address"/>
-                        <b>Free Shipping over: $</b>
+                    <div class="form-group col-md-2">
+                        <input type="text" class="form-control" name="phonenumber"  required/>
+                        <b>Phone Number</b>
                     </div>
-                    <div class="form-group col-md-3">
-                        <input type="text" class="form-control" name="shipping" id="map-address"/>
-                        <b>Shipping Fee: $</b>
+                    <div class="form-group col-md-2">
+                        <input type="text" class="form-control" name="freeshipping" />
+                        <b>Free Shipping over ($)</b>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <input type="text" class="form-control" name="shipping"  required/>
+                        <b>Shipping Fee ($)</b>
                     </div>
                     <div class="form-group col-md-12">
-                        <input type="text" class="form-control" name="paypal" id="map-address"/>
+                        <input type="text" class="form-control" name="paypal"  required/>
                         <b>Paypal HTML:</b>
                     </div>
 

@@ -37,6 +37,7 @@ class DishRegister(blobstore_handlers.BlobstoreUploadHandler):
     def post(self):
         user = users.get_current_user()
         upload = self.get_uploads()[0]
+
         restaurant_name = self.request.get('restaurant_name')
         restaurant_query = RestaurantModel.query(RestaurantModel.name==restaurant_name, RestaurantModel.owner==user).fetch()
         if (len(restaurant_query)>0) :
@@ -49,6 +50,7 @@ class DishRegister(blobstore_handlers.BlobstoreUploadHandler):
             dish.description = self.request.get('dish_description')
             dish.picture_key = upload.key()
             dish.put()
+            #self.redirect('/main_restaurant')
             self.redirect('/viewdishes?name=%s' %restaurant_name)
         else:
             self.redirect('/error')

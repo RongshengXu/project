@@ -43,7 +43,7 @@
                 </div>
                 <div class="panel-body">
                     {% if cart_query_len > 0%}
-                        <table class="table" style="font-size:12px;">
+                        <table class="table table-striped" style="font-size:12px;">
                             <thead>
                                 <tr>
                                     <!--<th>Restaurant Name</th>-->
@@ -79,14 +79,50 @@
                                 {% endfor %}
                             </tbody>
                         </table>
-                        <div>
-
+                        <div class="text-right">
+                            <b class="total_price">$</b> <b id="total_price" class="total_price">{{ cart_total }}</b>
                         </div>
                     {% else %}
                         <div style="text-align: center" class="list-group-item-heading">
                             <p>No Dish is available</p>
                         </div>
                     {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Customer Information (* means required)
+                </div>
+                <div class="panel-body">
+                    <form action="{{confirm_url}}" method="get"  enctype="multipart/form-data">
+                        <div class="form-group col-md-12 hidden">
+                            <b>Restaurant Name</b>
+                            <input type="text" class="form-control" name="restaurant_name" value="{{ restaurant_name }}"/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <b>Address *</b>
+                            <input type="text" class="form-control" name="customer_address" placeholder = "Please input the address for us to deliver the food" required/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <b>Phone Number *</b>
+                            <input type="text" class="form-control" name="customer_phone" placeholder = "Please input the phone number for to contact you" required/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <b>Time to Deilver</b>
+                            <input type="text" class="form-control" name="customer_time" placeholder = "We will deliver as soon as possible if this filed is empty"/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <b>Notes</b>
+                            <textarea type="text" class="form-control" name="customer_notes"  placeholder = "Please input additional requirements of the food, if you want to"></textarea>
+                        </div>
+
+                        <div class="col-md-12 text-right">
+                            <input type="submit" class="btn btn-success" value="Confirm and Checkout">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -138,10 +174,9 @@
 {#            </div>#}
 {#        {% endif %}#}
 {#        <!--<div id="paybutton">{{paypal_button|safe}}</div>-->#}
-        <div>
-            <a href="{{confirm_url}}">confirm and checkout</a>
-        </div>
-    </div>
+{#        <div>#}
+{#            <a href="{{confirm_url}}">confirm and checkout</a>#}
+{#        </div>#}
 </body>
 <script>
     function decrement(a) {

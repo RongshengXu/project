@@ -8,6 +8,12 @@ import jinja2
 import urllib
 import json
 from handlers.DataModel import RestaurantModel, DishModel, OrderModel, CartModel, HistoryCartModel
+from google.appengine.api import mail
+
+SERVICE_DOMAIN = "ross-1084"
+MAILBOX = ".appspotmail.com"
+APP_NAME = "Hungry"
+EMAIL_SENDER = APP_NAME + "@"+SERVICE_DOMAIN+MAILBOX
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -75,8 +81,14 @@ class ViewCartHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         carts_query = CartModel.query(CartModel.user==user).fetch()
         carts_info = []
+        length = len(carts_query)
         if (len(carts_query)>0):
             for cart in carts_query:
+                if (cart.total <= 0):
+                    length = length - 1
+                    cart.key.delete()
+                    continue
+
                 restaurant_name = cart.restaurant_name
                 total = cart.total
                 part = urllib.urlencode({'name': restaurant_name})
@@ -89,7 +101,7 @@ class ViewCartHandler(webapp2.RequestHandler):
                 carts_info.append((restaurant_name, total, cart_url))
         template = JINJA_ENVIRONMENT.get_template('templates/viewcart.html')
         template_values = {
-            'cart_query_len': len(carts_query),
+            'cart_query_len': length,
             'cart_info': carts_info
         }
         self.response.write(template.render(template_values))
@@ -105,6 +117,7 @@ class ViewSingleCartHandler(webapp2.RequestHandler):
         # self.response.write(str)
         if (len(cart_query)>0):
             cart = cart_query[0]
+            cart_total = cart.total
             if (len(cart.orders)>0):
                 for order_key in cart.orders:
                     order = order_key.get()
@@ -115,8 +128,9 @@ class ViewSingleCartHandler(webapp2.RequestHandler):
                     p = urllib.urlencode({'id':order_key.id(),'restaurant_name':restaurant_name})
                     cancel_url = "/cancel?%s" % p
                     cart_info.append((dish_name, dish_price, quantity, order_key.id(), cancel_url))
-        part = urllib.urlencode({'restaurant_name': restaurant_name})
-        confirm_url = '/confirm?%s' % part
+        # part = urllib.urlencode({'restaurant_name': restaurant_name})
+        # confirm_url = '/confirm?%s' % part
+        confirm_url = '/confirm'
         template = JINJA_ENVIRONMENT.get_template('templates/viewsinglecart.html')
         template_values = {
             'restaurant_name': restaurant_name,
@@ -124,6 +138,7 @@ class ViewSingleCartHandler(webapp2.RequestHandler):
             'paypal': restaurant_name,
             'paypal_button': str,
             'cart_info': cart_info,
+            'cart_total': cart_total,
             'confirm_url': confirm_url
         }
         self.response.write(template.render(template_values))
@@ -137,6 +152,13 @@ class ConfirmHandler(webapp2.RequestHandler):
         str = restaurant.payment
         cart = CartModel.query(CartModel.user==user, CartModel.restaurant_name==restaurant_name).fetch()[0]
         cart_id = cart.key.id()
+        ######################################################Save the customer information (user address|phone|notes)###########################################################
+        cart.customer_address = self.request.get('customer_address')
+        cart.customer_phone = self.request.get('customer_phone')
+        cart.customer_time = self.request.get('customer_time')
+        cart.customer_notes = self.request.get('customer_notes')
+        cart.put()
+
         shipping_fee = restaurant.shipping_fee
         template = JINJA_ENVIRONMENT.get_template('templates/confirm.html')
         template_values = {
@@ -144,7 +166,12 @@ class ConfirmHandler(webapp2.RequestHandler):
             'total_cost': cart.total,
             'shipping_fee': shipping_fee,
             'payment': str,
-            'cart_id': cart_id
+            'cart_id': cart_id,
+
+            'customer_address': cart.customer_address,
+            'customer_phone': cart.customer_phone,
+            'customer_time': cart.customer_time,
+            'customer_notes': cart.customer_notes,
         }
         self.response.write(template.render(template_values))
 
@@ -163,6 +190,19 @@ class PayHandler(webapp2.RequestHandler):
         restaurant_name = self.request.get('restaurant_name')
         user = users.get_current_user()
         cart = CartModel.query(CartModel.user==user, CartModel.restaurant_name==restaurant_name).fetch()[0]
+        ######################################################Send Email to restaurant###########################################################
+        user_email = user.nickname()
+        my_email = "yangxuanemail@gmail.com"
+        email_subject = "New Order"
+        email_content = '''You have a new order with the following information:
+        Address: %s
+        Phone Number: %s
+        Time: %s
+        Notes: %s'''
+
+        mail.send_mail(sender=EMAIL_SENDER, to=user_email, subject=email_subject, body=email_content % (cart.customer_address, cart.customer_phone, cart.customer_time, cart.customer_notes))
+        mail.send_mail(sender=EMAIL_SENDER, to=my_email, subject=email_subject, body=email_content % (cart.customer_address, cart.customer_phone, cart.customer_time, cart.customer_notes))
+
         history_cart = HistoryCartModel()
         history_cart.restaurant_name = restaurant_name
         history_cart.user = user
