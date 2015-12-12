@@ -34,7 +34,15 @@ class Register(blobstore_handlers.BlobstoreUploadHandler):
         upload cover picture and other information for a restaurant
     """
     def post(self):
-        restaurant = RestaurantModel()
+        restaurant_name = self.request.get('name')
+        user = users.get_current_user()
+        restaurant_list = RestaurantModel.query(RestaurantModel.owner==user, RestaurantModel.name==restaurant_name).fetch()
+
+        if (len(restaurant_list) <= 0 ):
+            restaurant = RestaurantModel()
+        else:
+            restaurant = restaurant_list[0]
+
         restaurant.name = self.request.get('name')
         restaurant.owner = users.get_current_user()
         restaurant.ownerName = self.request.get('ownername')
