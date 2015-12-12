@@ -21,7 +21,7 @@ class RestaurantModel(ndb.Model):
     shipping_fee = ndb.FloatProperty()
 
     createTime = ndb.DateTimeProperty(auto_now_add=True)
-    payment = ndb.StringProperty()
+    payment = ndb.StringProperty(indexed=False)
     type = ndb.StringProperty(repeated=True)
 
 class CartModel(ndb.Model):
