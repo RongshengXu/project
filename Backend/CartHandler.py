@@ -191,14 +191,14 @@ class PayHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         cart = CartModel.query(CartModel.user==user, CartModel.restaurant_name==restaurant_name).fetch()[0]
         ######################################################Send Email to restaurant###########################################################
-        order_contents = ''
+        order_contents = ' '
         if (len(cart.orders)>0):
             for order_key in cart.orders:
                 order = order_key.get()
                 dish = order.dish.get()
                 dish_name = dish.name
                 dish_quantity = order.number
-                order_contents = order_contents + dish_name + '(' + dish_quantity + ')' + ' | '
+                order_contents = order_contents + str(dish_name) + '(' + str(dish_quantity) + ')' + ' | '
 
         user_email = user.nickname()
         my_email = "yangxuanemail@gmail.com"
