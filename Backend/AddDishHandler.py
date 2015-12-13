@@ -39,13 +39,21 @@ class DishRegister(blobstore_handlers.BlobstoreUploadHandler):
         upload = self.get_uploads()[0]
 
         restaurant_name = self.request.get('restaurant_name')
+        dish_name = self.request.get('dish_name')
         restaurant_query = RestaurantModel.query(RestaurantModel.name==restaurant_name, RestaurantModel.owner==user).fetch()
         if (len(restaurant_query)>0) :
             # u = "%s" % user
             # self.response.write(restaurant_name +" " +  u)
             restaurant = restaurant_query[0]
-            dish = DishModel(parent=restaurant.key)
-            dish.name = self.request.get('dish_name')
+            key = restaurant.key
+            dish_list = DishModel.query(DishModel.name==dish_name, ancestor=key).fetch()
+
+            if (len(dish_list) <= 0):
+                dish = DishModel(parent=restaurant.key)
+            else:
+                dish = dish_list[0]
+
+            dish.name = dish_name
             dish.price = float(self.request.get('dish_price'))
             dish.description = self.request.get('dish_description')
             dish.picture_key = upload.key()
