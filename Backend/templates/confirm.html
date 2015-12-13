@@ -72,21 +72,28 @@
     <div id="cost" hidden="hidden">{{total_cost}}</div>
     <div id="shipping_fee" hidden="hidden">{{shipping_fee}}</div>
     <div class="container">
-        <div>Last step, ready for delicious food!</div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Restaurant Name</th>
-                    <th>Total Cost</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{restaurant_name}}</td>
-                    <td>{{total_cost}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="text-center hidden"><img src="/assets/images/comming.png" style="height:50px"></div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Pay Online
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Restaurant Name</th>
+                            <th>Total Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{restaurant_name}}</td>
+                            <td>{{total_cost}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div class="pull-right">{{payment|safe}}</div>
     </div>
     <div id="paypal"> </div>
