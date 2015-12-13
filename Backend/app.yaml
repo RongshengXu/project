@@ -113,10 +113,13 @@ handlers:
   script: LocationHandler.app
   login: required
 
+- url: /orders_restaurant
+  script: Orders_Restaurant.app
+  login: required
+
 - url: /order.*
   script: OrderHandler.app
   login: required
-
 
 - url: /main_restaurant
   script: Main_Restaurant.app

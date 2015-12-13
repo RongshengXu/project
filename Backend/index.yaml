@@ -18,6 +18,12 @@ indexes:
 
 - kind: HistoryCartModel
   properties:
+  - name: restaurant_name
+  - name: createTime
+    direction: desc
+
+- kind: HistoryCartModel
+  properties:
   - name: user
   - name: createTime
 
