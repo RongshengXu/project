@@ -24,6 +24,7 @@ class PlaceOrderHandler(webapp2.RequestHandler):
         restaurant_phone = restaurant.phoneNum
         restaurant_shippingfee = restaurant.shipping_fee
         restaurant_freeshipping = restaurant.free_shipping
+        restaurant_location = restaurant.location
 
         dish_query = DishModel.query(ancestor=restaurant.key).fetch()
         dish_info = []
@@ -46,6 +47,7 @@ class PlaceOrderHandler(webapp2.RequestHandler):
             'restaurant_phone': restaurant_phone,
             'restaurant_shippingfee': restaurant_shippingfee,
             'restaurant_freeshipping': restaurant_freeshipping,
+            'restaurant_location': restaurant_location,
             'dish_info': dish_info
         }
         self.response.write(template.render(template_values))

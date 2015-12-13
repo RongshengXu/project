@@ -32,6 +32,7 @@ class EvaluatePage(webapp2.RequestHandler):
         restaurant_phone = restaurant.phoneNum
         restaurant_shippingfee = restaurant.shipping_fee
         restaurant_freeshipping = restaurant.free_shipping
+        restaurant_location = restaurant.location
 
         if (user):
             url = users.create_logout_url(self.request.url)
@@ -58,6 +59,7 @@ class EvaluatePage(webapp2.RequestHandler):
                 'restaurant_phone': restaurant_phone,
                 'restaurant_shippingfee': restaurant_shippingfee,
                 'restaurant_freeshipping': restaurant_freeshipping,
+                'restaurant_location': restaurant_location,
                 'user': user,
                 'url': url,
                 'url_linktext': url_linktext,
