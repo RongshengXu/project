@@ -14,9 +14,12 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
+sort_dist = True
+
 class MainPage(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
+        global sort_dist
 
         if (user):
             u_query = UserModel.query(UserModel.user==user).fetch()
@@ -27,7 +30,7 @@ class MainPage(webapp2.RequestHandler):
                 lg = u.last_longitude
                 url = users.create_logout_url(self.request.url)
                 url_linktext = 'Logout'
-                restaurant_query = RestaurantModel.query().order().fetch()
+                restaurant_query = RestaurantModel.query().order(-RestaurantModel.TotalScore).fetch()
                 restaurant_info = []
                 if (len(restaurant_query) > 0):
                     for restaurant in restaurant_query:
@@ -38,7 +41,9 @@ class MainPage(webapp2.RequestHandler):
                         tmp1 = "/order?%s" % part
                         score = restaurant.TotalScore
                         restaurant_info.append((restaurant.name, tmp, a, l, tmp1, score))
-                restaurant_info.sort(key=lambda tup: (tup[2]-lat)**2+(tup[3]-lg)**2)
+
+                if (sort_dist):
+                    restaurant_info.sort(key=lambda tup: (tup[2]-lat)**2+(tup[3]-lg)**2)
 
                 # # Initialize a cart for this user
                 # cart_query = CartModel.query(CartModel.user==user).fetch()
@@ -65,6 +70,20 @@ class MainPage(webapp2.RequestHandler):
         else:
             self.redirect('/')
 
+class ChangeToDistance(webapp2.RequestHandler):
+    def get(self):
+        global sort_dist
+        sort_dist = True
+        self.redirect('/main')
+
+class ChangeToValuation(webapp2.RequestHandler):
+    def get(self):
+        global sort_dist
+        sort_dist = False
+        self.redirect('/main')
+
 app = webapp2.WSGIApplication([
-    ('/main', MainPage)
+    ('/main', MainPage),
+    ('/change_sort_to_distance', ChangeToDistance),
+    ('/change_sort_to_valuation', ChangeToValuation),
 ], debug=True)

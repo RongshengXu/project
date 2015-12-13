@@ -126,6 +126,14 @@ handlers:
   script: MainHandler.app
   login: required
 
+- url: /change_sort_to_distance
+  script: MainHandler.app
+  login: required
+
+- url: /change_sort_to_valuation
+  script: MainHandler.app
+  login: required
+
 - url: /option_get
   script: OptionHandler.app
 
