@@ -200,18 +200,23 @@ class PayHandler(webapp2.RequestHandler):
                 dish_quantity = order.number
                 order_contents = order_contents + str(dish_name) + '(' + str(dish_quantity) + ')' + ' | '
 
-        user_email = user.nickname()
-        my_email = "yangxuanemail@gmail.com"
-        email_subject = "New Order for " + restaurant_name
-        email_content = '''You have a new order with the following information:
-        Order Contents: %s
-        Address: %s
-        Phone Number: %s
-        Time: %s
-        Notes: %s'''
+        restaurant_list = RestaurantModel.query(RestaurantModel.name==restaurant_name).fetch()
+        if (len(restaurant_list)>0):
+            restaurant = restaurant_list[0]
 
-        mail.send_mail(sender=EMAIL_SENDER, to=user_email, subject=email_subject, body=email_content % (order_contents, cart.customer_address, cart.customer_phone, cart.customer_time, cart.customer_notes))
-        mail.send_mail(sender=EMAIL_SENDER, to=my_email, subject=email_subject, body=email_content % (order_contents, cart.customer_address, cart.customer_phone, cart.customer_time, cart.customer_notes))
+            #user_email = user.nickname()
+            restaurant_email = restaurant.owner.nickname()
+            my_email = "yangxuanemail@gmail.com"
+            email_subject = "New Order for " + restaurant_name
+            email_content = '''You have a new order with the following information:
+            Order Contents: %s
+            Address: %s
+            Phone Number: %s
+            Time: %s
+            Notes: %s'''
+
+            mail.send_mail(sender=EMAIL_SENDER, to=restaurant_email, subject=email_subject, body=email_content % (order_contents, cart.customer_address, cart.customer_phone, cart.customer_time, cart.customer_notes))
+            #mail.send_mail(sender=EMAIL_SENDER, to=my_email, subject=email_subject, body=email_content % (order_contents, cart.customer_address, cart.customer_phone, cart.customer_time, cart.customer_notes))
 
         history_cart = HistoryCartModel()
         history_cart.restaurant_name = restaurant_name
