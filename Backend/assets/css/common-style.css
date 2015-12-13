@@ -323,3 +323,15 @@ img.food_pic {
     font-family: Arial;
     font-size: 20px;
 }
+
+.faq_question{
+    font-family: 'Shift', sans-serif;
+    font-weight: bold;
+}
+
+img.hotline{
+    float:right;
+    position: relative;
+    height: 90px;
+    width: 90px;
+}
