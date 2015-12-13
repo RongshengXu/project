@@ -12,7 +12,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 class LoginPage(webapp2.RequestHandler):
     def get(self):
         if users.get_current_user():
-            self.redirect('/option')
+            self.redirect('/main')
         else:
             url = users.create_login_url(self.request.url)
             url_linktext = 'Sign in with Google'
