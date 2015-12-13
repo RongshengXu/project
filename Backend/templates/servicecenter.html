@@ -10,6 +10,7 @@
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/star_rating.js"></script>
+    <script src="/assets/js/toggle_ans.js"></script>
 </head>
 <body>
     <div class="container">
@@ -28,8 +29,75 @@
             </div>
         </nav>
     </div>
+
+    <div class="sidetools">
+        <a href="/main_restaurant" class="sidetools-item" title="Log as owner of a restaurant"><span class="glyphicon glyphicon-th"></span></a>
+        <a href="/viewcart" class="sidetools-item" title="My Cart"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+    </div>
+
     <div class="container">
-        Thank you for using the service of HUNGRY. We are doing our best to offer the best experience of ordering food!
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    FAQ for Customers
+                </div>
+                <div class="panel-body">
+                    <ol>
+                        <li class="faq_question">How to make an order?</li>
+                        <p class="ans hidden">Please first set the location, if you have not done that(you only need to do this once
+                            unless you want to change to another location).The Main page will list all the restaurant nearby,
+                            where you can sort them according to distance or valuation score. Choose a restaurant and click
+                            it to go the order page. You can add the food you want to your cart by click the "add to cart"
+                            button. You can then check your cart by click on the mychart button in the sidebar on the right.
+                        </p>
+                        <li class="faq_question">How to set my location?</li>
+                        <p class="ans hidden">Use the nav-bar to go the location page. The location will be set using google
+                            map. You only to do this for the first time to use this website, unless you want to change to
+                            another location.
+                        </p>
+                        <li class="faq_question">How to pay for my order?</li>
+                        <p class="ans hidden">You need to have a paypal account to pay for the order online. Click the
+                            order for a certain restaurant if you have one. After you adjust the quantity and input the
+                            necessary information for the order. you can click the confirm button to go the payment page.
+                        </p>
+                    </ol>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    FAQ for Restaurants
+                </div>
+                <div class="panel-body">
+                    <ol>
+                        <li class="faq_question">How to open a restaurant?</li>
+                        <p class="ans hidden">You need to go to the restaurant mode by click the "log as owner of a restaurant"
+                            button on the sidebar in the right.Then you can open a new restaurant by click the "Open a restaurant"
+                            button.
+                        </p>
+                        <li class="faq_question">How to add dishes to a restaurant?</li>
+                        <p class="ans hidden">Login as restaurant and then click the restaurant where you want to add dishes.
+                            The restaurant page will show you a "add more dishes" button to add more dishes.
+                        </p>
+                        <li class="faq_question">How to edit my restaurant?</li>
+                        <p class="ans hidden">You can add a restaurant with the same name to edit the information of the restaurant.
+                            The edition of the dishes will be same.
+                        </p>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Contact Us
+                </div>
+                <div class="panel-body">
+                    <img src="/assets/images/hotline.png" class="hotline"/>
+                    <h4>Service Hotline</h4>
+                    <p class="text-primary"><b>5129343572</b></p>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
