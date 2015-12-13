@@ -324,9 +324,12 @@ img.food_pic {
     font-size: 20px;
 }
 
-.faq_question{
-    font-family: 'Shift', sans-serif;
+li.faq_question{
     font-weight: bold;
+}
+
+li.current {
+    color: #286090;
 }
 
 img.hotline{
