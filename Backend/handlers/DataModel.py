@@ -22,6 +22,7 @@ class RestaurantModel(ndb.Model):
 
     createTime = ndb.DateTimeProperty(auto_now_add=True)
     payment = ndb.StringProperty(indexed=False)
+    # payment = ndb.TextProperty(indexed=False)
     type = ndb.StringProperty(repeated=True)
 
 class CartModel(ndb.Model):

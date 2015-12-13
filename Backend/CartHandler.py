@@ -7,6 +7,7 @@ import os
 import jinja2
 import urllib
 import json
+import quopri
 from handlers.DataModel import RestaurantModel, DishModel, OrderModel, CartModel, HistoryCartModel
 from google.appengine.api import mail
 
@@ -149,7 +150,8 @@ class ConfirmHandler(webapp2.RequestHandler):
         restaurant_name = self.request.get('restaurant_name')
         # self.response.write(restaurant_name)
         restaurant = RestaurantModel.query(RestaurantModel.name == restaurant_name).fetch()[0]
-        str = restaurant.payment
+        # str = restaurant.payment
+        str = quopri.decodestring(restaurant.payment)
         cart = CartModel.query(CartModel.user==user, CartModel.restaurant_name==restaurant_name).fetch()[0]
         cart_id = cart.key.id()
         ######################################################Save the customer information (user address|phone|notes)###########################################################
